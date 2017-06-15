@@ -133,10 +133,12 @@
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="SDL.cpp" />
     <ClCompile Include="SDLError.cpp" />
+    <ClCompile Include="Surface.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Library.h" />
+    <ClInclude Include="..\include\Surface.h" />
     <ClInclude Include="..\include\Vector4S32.h" />
     <ClInclude Include="..\include\SDL.h" />
     <ClInclude Include="..\include\SDLError.h" />

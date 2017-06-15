@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Vector4S32.h"
+#include "Surface.h"
 
 namespace SDL
 {
@@ -25,11 +26,13 @@ namespace SDL
 		Window(Window&&) = delete;
 		~Window();
 
-		void UpdateWindowSurface();
+		void UpdateWindowSurface() const;
+		inline Surface& GetWindowSurface() { return windowSurface_; }
 
 		void ShowSimpleMessageBox(const string& title, const string& msg) const;
 	private:
 		void* windowHandler_;
+		Surface windowSurface_;
 	};
 }
 

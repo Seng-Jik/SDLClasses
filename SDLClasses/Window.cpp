@@ -3,10 +3,23 @@
 
 
 SDL::Window::Window(const string & title, Rect r, WindowFlag flags)
+	:
+	windowHandler_(
+		SDL_CreateWindow(
+			title.c_str(),
+			r.x == Center ? SDL_WINDOWPOS_CENTERED : r.x,
+			r.y == Center ? SDL_WINDOWPOS_CENTERED : r.y,
+			r.w, r.h, 
+			static_cast<uint32_t>(flags)
+		)
+	),
+	windowSurface_(
+		SDL_GetWindowSurface(
+			static_cast<SDL_Window*>(windowHandler_)
+		),
+		false
+	)
 {
-	r.x = r.x == Center ? SDL_WINDOWPOS_CENTERED : r.x;
-	r.y = r.y == Center ? SDL_WINDOWPOS_CENTERED : r.y;
-	windowHandler_ = SDL_CreateWindow(title.c_str(), r.x, r.y, r.w, r.h, static_cast<uint32_t>(flags));
 }
 
 SDL::Window::~Window()
@@ -14,7 +27,7 @@ SDL::Window::~Window()
 	SDL_DestroyWindow(static_cast<SDL_Window*>(windowHandler_));
 }
 
-void SDL::Window::UpdateWindowSurface()
+void SDL::Window::UpdateWindowSurface() const
 {
 	SDL_UpdateWindowSurface(static_cast<SDL_Window*>(windowHandler_));
 }
