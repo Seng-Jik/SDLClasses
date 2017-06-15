@@ -1,0 +1,35 @@
+#pragma once
+#include <string>
+#include "Vector4S32.h"
+
+namespace SDL
+{
+	using std::string;
+
+	class Window
+	{
+	public:
+
+		enum class WindowFlag : uint32_t
+		{
+			Null = 0,
+			FullScreen = 0x00000001,
+			FullScreenDesktop = FullScreen | 0x00001000,
+			OpenGL = 0x00000002
+		};
+
+		static const int32_t Center = -1;
+
+		Window(const string& title,Rect rectangle, WindowFlag);
+		Window(const Window&) = delete;
+		Window(Window&&) = delete;
+		~Window();
+
+		void UpdateWindowSurface();
+
+		void ShowSimpleMessageBox(const string& title, const string& msg);
+	private:
+		void* windowHandler_;
+	};
+}
+

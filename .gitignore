@@ -7,3 +7,6 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
+/SDLClasses/.vs/SDLClasses/v15/ipch
+/SDLClassesTests
+/SDLClasses
