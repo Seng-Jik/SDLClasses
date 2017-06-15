@@ -3,7 +3,7 @@
 
 using namespace SDL;
 
-void * SDL::Library::loadFunction(const std::string & funcName)
+void * SDL::Library::loadFunction(const std::string & funcName) const
 {
 	return SDL_LoadFunction(libraryHandle_, funcName.c_str());
 }

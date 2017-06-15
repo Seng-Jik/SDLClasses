@@ -23,7 +23,7 @@ void SDL::SDL::SetHint(const string & hint, const string & value)
 		throw SDLError();
 }
 
-SDL::Vector4U8 SDL::SDL::GetVersion()
+SDL::Vector4U8 SDL::SDL::GetVersion() const
 {
 	SDL_version ver;
 	SDL_GetVersion(&ver);

@@ -19,7 +19,7 @@ void SDL::Window::UpdateWindowSurface()
 	SDL_UpdateWindowSurface(static_cast<SDL_Window*>(windowHandler_));
 }
 
-void SDL::Window::ShowSimpleMessageBox(const string & title, const string & msg)
+void SDL::Window::ShowSimpleMessageBox(const string & title, const string & msg) const
 {
 	SDL_ShowSimpleMessageBox(0, title.c_str(), msg.c_str(), static_cast<SDL_Window*>(windowHandler_));
 }

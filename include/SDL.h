@@ -30,7 +30,7 @@ namespace SDL
 		~SDL();
 
 		void SetHint(const string& hint, const string& value);
-		Vector4U8 GetVersion();
+		Vector4U8 GetVersion() const;
 
 		static uint64_t GetTicks();
 		static void Delay(uint32_t);

@@ -27,7 +27,7 @@ namespace SDL
 
 		void UpdateWindowSurface();
 
-		void ShowSimpleMessageBox(const string& title, const string& msg);
+		void ShowSimpleMessageBox(const string& title, const string& msg) const;
 	private:
 		void* windowHandler_;
 	};
