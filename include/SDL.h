@@ -6,6 +6,7 @@ namespace SDL
 {
 	using std::string;
 	struct Vector4U8;
+	struct MouseState;
 
 	class SDL
 	{
@@ -34,6 +35,7 @@ namespace SDL
 		static void SetHint(const string& hint, const string& value);
 		static Vector4U8 GetVersion();
 
+		static MouseState GetMouseState();
 		static uint64_t GetTicks();
 		static uint64_t GetPerformanceFrequency();
 		static uint64_t GetPerformanceCounter();

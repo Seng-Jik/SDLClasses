@@ -1,7 +1,9 @@
 #include "..\include\SDL.h"
 #include <SDL.h>
+#include "..\include\MouseState.h"
 #include "..\include\SDLError.h"
 #include "..\include\Vector4U8.h"
+
 
 using std::string;
 
@@ -28,6 +30,16 @@ SDL::Vector4U8 SDL::SDL::GetVersion()
 	SDL_version ver;
 	SDL_GetVersion(&ver);
 	return Vector4U8{ ver.major,ver.minor,ver.patch,0 };
+}
+
+SDL::MouseState SDL::SDL::GetMouseState()
+{
+	MouseState state;
+	auto buttonStates = SDL_GetMouseState(&state.position.x,&state.position.y);
+	state.leftButton = buttonStates & SDL_BUTTON(SDL_BUTTON_LEFT);
+	state.rightButton = buttonStates & SDL_BUTTON(SDL_BUTTON_RIGHT);
+	state.middleButton = buttonStates & SDL_BUTTON(SDL_BUTTON_MIDDLE);
+	return state;
 }
 
 uint64_t SDL::SDL::GetTicks()
