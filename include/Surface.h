@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 #include <vector>
+#include <string>
 
 namespace SDL
 {
@@ -24,6 +25,7 @@ namespace SDL
 		Surface& operator = (const Surface&) = delete;
 
 		inline bool Available() { return surfaceHandle_ != nullptr; }
+		void SaveBMP(const std::string& file);
 
 		void Shade(std::function<ColorU8(int x,int y,Surface& thisSurface,ColorU8 nowColor)>);
 		void Fill(const Rect&, ColorU8);
