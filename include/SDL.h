@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <functional>
 #include <string>
 
 namespace SDL 
@@ -32,18 +33,20 @@ namespace SDL
 		SDL& operator = (SDL&&) = delete;
 		SDL& operator = (const SDL&) = delete;
 
-		static void SetHint(const string& hint, const string& value);
-		static Vector4U8 GetVersion();
+		void SetHint(const string& hint, const string& value);
+		Vector4U8 GetVersion() const;
 
-		static MouseState GetMouseState();
-		static uint64_t GetTicks();
-		static uint64_t GetPerformanceFrequency();
-		static uint64_t GetPerformanceCounter();
-		static void SetMouseCursorShow(bool);
-		static void Delay(uint32_t);
-		static void EnableScreenSaver(bool);
+		void ProcessEvents();
+		bool KeyPressed(const string&) const;
+		MouseState GetMouseState() const;
+
+		uint64_t GetTicks() const;
+		uint64_t GetPerformanceFrequency() const;
+		uint64_t GetPerformanceCounter() const;
+		void SetMouseCursorShow(bool);
+		void Delay(uint32_t) const;
+		void EnableScreenSaver(bool);
 
 	private:
-
 	};
 }

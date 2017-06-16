@@ -25,14 +25,28 @@ void SDL::SDL::SetHint(const string & hint, const string & value)
 		throw SDLError();
 }
 
-SDL::Vector4U8 SDL::SDL::GetVersion()
+SDL::Vector4U8 SDL::SDL::GetVersion() const
 {
 	SDL_version ver;
 	SDL_GetVersion(&ver);
 	return Vector4U8{ ver.major,ver.minor,ver.patch,0 };
 }
 
-SDL::MouseState SDL::SDL::GetMouseState()
+void SDL::SDL::ProcessEvents()
+{
+	SDL_PumpEvents();
+}
+
+bool SDL::SDL::KeyPressed(const string & keyName) const
+{
+	auto scanCode = SDL_GetScancodeFromName(keyName.c_str());
+	if (scanCode == SDL_SCANCODE_UNKNOWN) throw std::exception(("Unknow key:" + keyName).c_str());
+	auto states = SDL_GetKeyboardState(nullptr);
+	if (states == nullptr) throw SDLError();
+	return states[scanCode] != 0;
+}
+
+SDL::MouseState SDL::SDL::GetMouseState() const
 {
 	MouseState state;
 	auto buttonStates = SDL_GetMouseState(&state.position.x,&state.position.y);
@@ -42,17 +56,17 @@ SDL::MouseState SDL::SDL::GetMouseState()
 	return state;
 }
 
-uint64_t SDL::SDL::GetTicks()
+uint64_t SDL::SDL::GetTicks() const
 {
 	return SDL_GetTicks();
 }
 
-uint64_t SDL::SDL::GetPerformanceFrequency()
+uint64_t SDL::SDL::GetPerformanceFrequency() const
 {
 	return SDL_GetPerformanceFrequency();
 }
 
-uint64_t SDL::SDL::GetPerformanceCounter()
+uint64_t SDL::SDL::GetPerformanceCounter() const
 {
 	return SDL_GetPerformanceCounter();
 }
@@ -62,7 +76,7 @@ void SDL::SDL::SetMouseCursorShow(bool b)
 	SDL_ShowCursor(b);
 }
 
-void SDL::SDL::Delay(uint32_t ms)
+void SDL::SDL::Delay(uint32_t ms) const
 {
 	SDL_Delay(ms);
 }

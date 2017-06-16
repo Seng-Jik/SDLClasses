@@ -1,11 +1,13 @@
 #include "..\include\Surface.h"
 #include "..\include\Vector2S32.h"
 #include "..\include\Vector4S32.h"
+#include "..\include\SDLError.h"
 #include "..\include\Vector4U8.h"
 #include <SDL.h>
 #include "..\include\Guard.h"
 SDL::Surface::Surface(void * surfaceStruct, bool destoryByClass)
 {
+	if (!Available()) throw SDLError();
 	surfaceHandle_ = surfaceStruct;
 	destoryByClass_ = destoryByClass;
 }
@@ -13,13 +15,16 @@ SDL::Surface::Surface(void * surfaceStruct, bool destoryByClass)
 SDL::Surface::Surface(const char * bmpFile)
 {
 	surfaceHandle_ = SDL_LoadBMP(bmpFile);
+	if (!Available()) throw SDLError();
 	destoryByClass_ = true;
 }
 
 SDL::Surface::Surface(void * bmpFileInMemory, size_t size)
 {
 	auto rw = SDL_RWFromConstMem(bmpFileInMemory, size);
+	if(rw == nullptr) throw SDLError();
 	surfaceHandle_ = SDL_LoadBMP_RW(rw,size);
+	if (!Available()) throw SDLError();
 	destoryByClass_ = true;
 	SDL_RWclose(rw);
 }
@@ -27,6 +32,7 @@ SDL::Surface::Surface(void * bmpFileInMemory, size_t size)
 SDL::Surface::Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am)
 {
 	surfaceHandle_ = SDL_CreateRGBSurface(0, width, height, depth, Rm, Gm, Bm, Am);
+	if (!Available()) throw SDLError();
 	destoryByClass_ = true;
 }
 
