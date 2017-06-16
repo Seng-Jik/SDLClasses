@@ -137,8 +137,10 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Guard.h" />
     <ClInclude Include="..\include\Library.h" />
     <ClInclude Include="..\include\Surface.h" />
+    <ClInclude Include="..\include\Vector2S32.h" />
     <ClInclude Include="..\include\Vector4S32.h" />
     <ClInclude Include="..\include\SDL.h" />
     <ClInclude Include="..\include\SDLError.h" />

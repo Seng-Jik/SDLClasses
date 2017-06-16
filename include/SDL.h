@@ -28,6 +28,8 @@ namespace SDL
 		SDL(const SDL&) = delete;
 		SDL(SDL&&) = delete;
 		~SDL();
+		SDL& operator = (SDL&&) = delete;
+		SDL& operator = (const SDL&) = delete;
 
 		void SetHint(const string& hint, const string& value);
 		Vector4U8 GetVersion() const;

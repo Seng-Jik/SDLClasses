@@ -25,6 +25,8 @@ namespace SDL
 		Window(const Window&) = delete;
 		Window(Window&&) = delete;
 		~Window();
+		Window& operator = (Window&&) = delete;
+		Window& operator = (const Window&) = delete;
 
 		void UpdateWindowSurface() const;
 		inline Surface& GetWindowSurface() { return windowSurface_; }

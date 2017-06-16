@@ -12,6 +12,8 @@ namespace SDL
 		Library(const Library&) = delete;
 		Library(Library&&) = delete;
 		~Library();
+		Library& operator = (Library&&) = delete;
+		Library& operator = (const Library&) = delete;
 
 		template<class FuncType>
 		std::function<FuncType> LoadFunction(const std::string& funcName) const
