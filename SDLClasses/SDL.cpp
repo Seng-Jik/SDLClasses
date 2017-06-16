@@ -56,6 +56,11 @@ SDL::MouseState SDL::SDL::GetMouseState() const
 	return state;
 }
 
+bool SDL::SDL::QuitRequested() const
+{
+	return SDL_QuitRequested();
+}
+
 uint64_t SDL::SDL::GetTicks() const
 {
 	return SDL_GetTicks();

@@ -39,6 +39,7 @@ namespace SDL
 		void ProcessEvents();
 		bool KeyPressed(const string&) const;
 		MouseState GetMouseState() const;
+		bool QuitRequested() const;
 
 		uint64_t GetTicks() const;
 		uint64_t GetPerformanceFrequency() const;

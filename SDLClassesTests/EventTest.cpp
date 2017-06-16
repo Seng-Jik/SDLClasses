@@ -44,7 +44,7 @@ namespace SDLClassesTests
 						255
 					});
 
-					if (sdl.KeyPressed("Escape")) bRun = false;
+					if (sdl.KeyPressed("Escape") || sdl.QuitRequested()) bRun = false;
 				}
 				catch (std::exception e) {
 					Log(e.what());
