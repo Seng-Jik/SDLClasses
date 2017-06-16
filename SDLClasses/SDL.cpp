@@ -23,7 +23,7 @@ void SDL::SDL::SetHint(const string & hint, const string & value)
 		throw SDLError();
 }
 
-SDL::Vector4U8 SDL::SDL::GetVersion() const
+SDL::Vector4U8 SDL::SDL::GetVersion()
 {
 	SDL_version ver;
 	SDL_GetVersion(&ver);
@@ -33,6 +33,21 @@ SDL::Vector4U8 SDL::SDL::GetVersion() const
 uint64_t SDL::SDL::GetTicks()
 {
 	return SDL_GetTicks();
+}
+
+uint64_t SDL::SDL::GetPerformanceFrequency()
+{
+	return SDL_GetPerformanceFrequency();
+}
+
+uint64_t SDL::SDL::GetPerformanceCounter()
+{
+	return SDL_GetPerformanceCounter();
+}
+
+void SDL::SDL::SetMouseCursorShow(bool b)
+{
+	SDL_ShowCursor(b);
 }
 
 void SDL::SDL::Delay(uint32_t ms)

@@ -31,10 +31,13 @@ namespace SDL
 		SDL& operator = (SDL&&) = delete;
 		SDL& operator = (const SDL&) = delete;
 
-		void SetHint(const string& hint, const string& value);
-		Vector4U8 GetVersion() const;
+		static void SetHint(const string& hint, const string& value);
+		static Vector4U8 GetVersion();
 
 		static uint64_t GetTicks();
+		static uint64_t GetPerformanceFrequency();
+		static uint64_t GetPerformanceCounter();
+		static void SetMouseCursorShow(bool);
 		static void Delay(uint32_t);
 		static void EnableScreenSaver(bool);
 
