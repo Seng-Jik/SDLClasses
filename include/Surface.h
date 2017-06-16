@@ -2,6 +2,7 @@
 #include <functional>
 #include <vector>
 #include <string>
+#include <any>
 
 namespace SDL
 {
@@ -14,7 +15,7 @@ namespace SDL
 	class Surface
 	{
 	public:
-		Surface(void* surfaceStruct,bool destoryByClass);
+		Surface(std::any&& surfaceStruct,bool destoryByClass);
 		Surface(const char* bmpFile);
 		Surface(void* bmpFileInMemory,size_t size);
 		Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);
@@ -24,7 +25,7 @@ namespace SDL
 		Surface& operator = (Surface&&);
 		Surface& operator = (const Surface&) = delete;
 
-		inline bool Available() { return surfaceHandle_ != nullptr; }
+		bool Available();
 		void SaveBMP(const std::string& file);
 
 		void Shade(std::function<ColorU8(int x,int y,Surface& thisSurface,ColorU8 nowColor)>);
@@ -36,7 +37,7 @@ namespace SDL
 		Vector2S32 GetSize();
 	private:
 		void clear();
-		void* surfaceHandle_;
+		std::any surfaceHandle_;
 		bool destoryByClass_;
 	};
 }

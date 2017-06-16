@@ -1,11 +1,14 @@
 #pragma once
 #include <string>
+#include <any>
 #include "Vector4S32.h"
 #include "Surface.h"
 
 namespace SDL
 {
 	using std::string;
+
+	class GLContext;
 
 	class Window
 	{
@@ -23,17 +26,19 @@ namespace SDL
 
 		Window(const string& title,Rect rectangle, WindowFlag);
 		Window(const Window&) = delete;
-		Window(Window&&) = delete;
+		Window(Window&&) = default;
 		~Window();
-		Window& operator = (Window&&) = delete;
+		Window& operator = (Window&&) = default;
 		Window& operator = (const Window&) = delete;
 
 		void UpdateWindowSurface() const;
 		inline Surface& GetWindowSurface() { return windowSurface_; }
 
 		void ShowSimpleMessageBox(const string& title, const string& msg) const;
+
+		GLContext CreateOpenGLContext();
 	private:
-		void* windowHandler_;
+		std::any windowHandler_;
 		Surface windowSurface_;
 	};
 }

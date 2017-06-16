@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GLContext.cpp" />
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="SDL.cpp" />
     <ClCompile Include="SDLError.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\GLContext.h" />
     <ClInclude Include="..\include\Guard.h" />
     <ClInclude Include="..\include\Library.h" />
     <ClInclude Include="..\include\MouseState.h" />

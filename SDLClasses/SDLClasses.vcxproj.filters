@@ -30,6 +30,9 @@
     <ClCompile Include="Surface.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GLContext.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\SDL.h">
@@ -60,6 +63,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\MouseState.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GLContext.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

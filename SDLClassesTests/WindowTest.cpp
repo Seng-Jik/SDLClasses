@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <Vector4U8.h>
 #include <Window.h>
+#include <GLContext.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -24,9 +25,10 @@ namespace SDLClassesTests
 		{
 			using namespace SDL;
 			::SDL::SDL sdl;
-			Window wnd("HelloWorld", Rect{ Window::Center,Window::Center,1024,768 }, Window::WindowFlag::Null);
+			Window wnd("HelloWorld", Rect{ Window::Center,Window::Center,1024,768 }, Window::WindowFlag::OpenGL);
+			auto glContext = wnd.CreateOpenGLContext();
 			wnd.ShowSimpleMessageBox("Test MsgBox", "Just a Test");
 		}
-
+		
 	};
 }

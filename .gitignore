@@ -15,3 +15,7 @@ $RECYCLE.BIN/
 /SDLClassesTest/Debug
 /SDLClassesTest/Release
 /SDLClassesTest/x64
+/SDLClassesTests/Debug
+/SDLClassesTests/Release
+/SDLClassesTests/x64
+/SDLClasses/.vs/SDLClasses/v15
