@@ -26,9 +26,9 @@ namespace SDL
 
 		Window(const string& title,Rect rectangle, WindowFlag);
 		Window(const Window&) = delete;
-		Window(Window&&) = default;
+		Window(Window&&) = delete;
 		~Window();
-		Window& operator = (Window&&) = default;
+		Window& operator = (Window&&) = delete;
 		Window& operator = (const Window&) = delete;
 
 		void UpdateWindowSurface() const;

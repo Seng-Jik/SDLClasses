@@ -16,13 +16,13 @@ namespace SDL
 	{
 	public:
 		Surface(std::any&& surfaceStruct,bool destoryByClass);
-		Surface(const char* bmpFile);
+		Surface(const std::string& bmpFile);
 		Surface(void* bmpFileInMemory,size_t size);
 		Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);
 		Surface(const Surface&) = delete;
-		Surface(Surface&&);
+		Surface(Surface&&) = default;
 		~Surface();
-		Surface& operator = (Surface&&);
+		Surface& operator = (Surface&&) = default;
 		Surface& operator = (const Surface&) = delete;
 
 		bool Available();

@@ -12,9 +12,9 @@ SDL::Surface::Surface(std::any&& surfaceStruct, bool destoryByClass)
 	destoryByClass_ = destoryByClass;
 }
 
-SDL::Surface::Surface(const char * bmpFile)
+SDL::Surface::Surface(const std::string& bmpFile)
 {
-	surfaceHandle_ = SDL_LoadBMP(bmpFile);
+	surfaceHandle_ = SDL_LoadBMP(bmpFile.c_str());
 	if (!Available()) throw SDLError();
 	destoryByClass_ = true;
 }
@@ -36,24 +36,10 @@ SDL::Surface::Surface(int width, int height, int depth, int pitch, uint32_t Rm, 
 	destoryByClass_ = true;
 }
 
-SDL::Surface::Surface(Surface && other)
-{
-	*this=(std::move(other));
-}
 
 SDL::Surface::~Surface()
 {
 	clear();
-}
-
-SDL::Surface & SDL::Surface::operator=(Surface && other)
-{
-	clear();
-	destoryByClass_ = other.destoryByClass_;
-	surfaceHandle_ = other.surfaceHandle_;
-	other.destoryByClass_ = false;
-	other.surfaceHandle_.reset();
-	return *this;
 }
 
 bool SDL::Surface::Available() 
@@ -150,7 +136,7 @@ SDL::Vector2S32 SDL::Surface::GetSize()
 
 void SDL::Surface::clear()
 {
-	if (destoryByClass_)
+	if (destoryByClass_ && surfaceHandle_.has_value())
 		SDL_FreeSurface(std::any_cast<SDL_Surface*>(surfaceHandle_));
 	surfaceHandle_.reset();
 	destoryByClass_ = false;
