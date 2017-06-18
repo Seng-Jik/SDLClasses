@@ -6,11 +6,10 @@
 
 namespace SDL
 {
-	struct Vector4U8;
-	struct Vector4S32;
-	struct ColorU8;
-	struct Rect;
-	struct Vector2S32;
+	template<typename T> struct Vector4;
+	template<typename T> struct Color;
+	template<typename T> struct Rect;
+	template<typename T> struct Vector2;
 
 	class Surface
 	{
@@ -28,13 +27,13 @@ namespace SDL
 		bool Available();
 		void SaveBMP(const std::string& file);
 
-		void Shade(std::function<ColorU8(int x,int y,Surface& thisSurface,ColorU8 nowColor)>);
-		void Fill(const Rect&, ColorU8);
-		void Fill(const std::vector<Rect>&, ColorU8);
-		void Clear(ColorU8);
+		void Shade(std::function<Color<uint8_t>(int x,int y,Surface& thisSurface,Color<uint8_t> nowColor)>);
+		void Fill(const Rect<int32_t>&, Color<uint8_t>);
+		void Fill(const std::vector<Rect<int32_t>>&, Color<uint8_t>);
+		void Clear(Color<uint8_t>);
 		void SetRLE(bool);
-		void BlitFrom(const Surface& from, const Rect& fromRect, const Rect& toRect);
-		Vector2S32 GetSize();
+		void BlitFrom(const Surface& from, const Rect<int32_t>& fromRect, const Rect<int32_t>& toRect);
+		Vector2<int32_t> GetSize();
 	private:
 		void clear();
 		std::any surfaceHandle_;

@@ -3,9 +3,10 @@
 
 namespace SDL
 {
-	struct Vector2S32
+	template<typename T>
+	struct Vector2
 	{
-		int32_t x, y;
+		T x, y;
 	};
 
 }

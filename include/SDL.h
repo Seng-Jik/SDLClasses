@@ -6,7 +6,7 @@
 namespace SDL 
 {
 	using std::string;
-	struct Vector4U8;
+	template<typename T> struct Vector3;
 	struct MouseState;
 
 	class SDL
@@ -34,7 +34,7 @@ namespace SDL
 		SDL& operator = (const SDL&) = delete;
 
 		void SetHint(const string& hint, const string& value);
-		Vector4U8 GetVersion() const;
+		Vector3<uint8_t> GetVersion() const;
 
 		void ProcessEvents();
 		bool KeyPressed(const string&) const;

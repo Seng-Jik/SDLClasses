@@ -1,11 +1,11 @@
 #pragma once
-#include "Vector2S32.h"
+#include "Vector2.h"
 
 namespace SDL
 {
 	struct MouseState
 	{
-		Vector2S32 position;
+		Vector2<int32_t> position;
 		bool leftButton, rightButton, middleButton;
 	};
 }

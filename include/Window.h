@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <any>
-#include "Vector4S32.h"
+#include "Vector4.h"
 #include "Surface.h"
 
 namespace SDL
@@ -24,7 +24,7 @@ namespace SDL
 
 		static const int32_t Center = -1;
 
-		Window(const string& title,Rect rectangle, WindowFlag);
+		Window(const string& title,Rect<int32_t> rectangle, WindowFlag);
 		Window(const Window&) = delete;
 		Window(Window&&) = delete;
 		~Window();

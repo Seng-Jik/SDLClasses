@@ -41,22 +41,13 @@
     <ClInclude Include="..\include\SDLError.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Vector4U8.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Library.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Vector4S32.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Window.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Surface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Vector2S32.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Guard.h">
@@ -66,6 +57,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\GLContext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Vector2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Vector4.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Vector3.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

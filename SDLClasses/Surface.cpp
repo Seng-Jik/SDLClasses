@@ -1,8 +1,7 @@
 #include "..\include\Surface.h"
-#include "..\include\Vector2S32.h"
-#include "..\include\Vector4S32.h"
+#include "..\include\Vector2.h"
+#include "..\include\Vector4.h"
 #include "..\include\SDLError.h"
-#include "..\include\Vector4U8.h"
 #include <SDL.h>
 #include "..\include\Guard.h"
 SDL::Surface::Surface(std::any&& surfaceStruct, bool destoryByClass)
@@ -54,7 +53,7 @@ void SDL::Surface::SaveBMP(const std::string & file)
 	SDL_SaveBMP(std::any_cast<SDL_Surface*>(surfaceHandle_),file.c_str());
 }
 
-void SDL::Surface::Shade(std::function<ColorU8(int x, int y, Surface&thisSurface,ColorU8 nowColor)> f)
+void SDL::Surface::Shade(std::function<Color<uint8_t>(int x, int y, Surface&thisSurface,Color<uint8_t> nowColor)> f)
 {
 	auto sur = std::any_cast<SDL_Surface*>(surfaceHandle_);
 	const bool lock = SDL_MUSTLOCK(sur);
@@ -69,7 +68,7 @@ void SDL::Surface::Shade(std::function<ColorU8(int x, int y, Surface&thisSurface
 			px += sur->format->BytesPerPixel * x;
 			auto pxUint32 = reinterpret_cast<Uint32*>(px);
 
-			ColorU8 oldCol;
+			Color<uint8_t> oldCol;
 			SDL_GetRGBA(*pxUint32, sur->format, &oldCol.r, &oldCol.g, &oldCol.b, &oldCol.a);
 
 			auto newCol = f(x, y, *this, oldCol);
@@ -78,7 +77,7 @@ void SDL::Surface::Shade(std::function<ColorU8(int x, int y, Surface&thisSurface
 	}
 }
 
-void SDL::Surface::Fill(const Rect & rect, ColorU8 col)
+void SDL::Surface::Fill(const Rect<int32_t> & rect, Color<uint8_t> col)
 {
 	auto frect = reinterpret_cast<const SDL_Rect&>(rect);
 	auto color = SDL_MapRGBA(
@@ -91,7 +90,7 @@ void SDL::Surface::Fill(const Rect & rect, ColorU8 col)
 	SDL_FillRect(std::any_cast<SDL_Surface*>(surfaceHandle_), &frect, color);
 }
 
-void SDL::Surface::Fill(const std::vector<Rect>& rectSet, ColorU8 col)
+void SDL::Surface::Fill(const std::vector<Rect<int32_t>>& rectSet, Color<uint8_t> col)
 {
 	auto rects = reinterpret_cast<const SDL_Rect*>(rectSet.data());
 	auto color = SDL_MapRGBA(
@@ -104,7 +103,7 @@ void SDL::Surface::Fill(const std::vector<Rect>& rectSet, ColorU8 col)
 	SDL_FillRects(std::any_cast<SDL_Surface*>(surfaceHandle_), rects, rectSet.size(), color);
 }
 
-void SDL::Surface::Clear(ColorU8 col)
+void SDL::Surface::Clear(Color<uint8_t> col)
 {
 	auto color = SDL_MapRGBA(
 		std::any_cast<SDL_Surface*>(surfaceHandle_)->format,
@@ -121,17 +120,17 @@ void SDL::Surface::SetRLE(bool b)
 	SDL_SetSurfaceRLE(std::any_cast<SDL_Surface*>(surfaceHandle_),b);
 }
 
-void SDL::Surface::BlitFrom(const Surface & from, const Rect & fromRect, const Rect & toRect)
+void SDL::Surface::BlitFrom(const Surface & from, const Rect<int32_t> & fromRect, const Rect<int32_t> & toRect)
 {
 	auto srcRect = reinterpret_cast<const SDL_Rect&>(fromRect);
 	auto dstRect = reinterpret_cast<const SDL_Rect&>(toRect);
 	SDL_BlitSurface(std::any_cast<SDL_Surface*>(from.surfaceHandle_), &srcRect, std::any_cast<SDL_Surface*>(surfaceHandle_), &dstRect);
 }
 
-SDL::Vector2S32 SDL::Surface::GetSize()
+SDL::Vector2<int32_t> SDL::Surface::GetSize()
 {
 	auto sur = std::any_cast<SDL_Surface*>(surfaceHandle_);
-	return Vector2S32{sur->w,sur->h};
+	return Vector2<int32_t>{sur->w,sur->h};
 }
 
 void SDL::Surface::clear()

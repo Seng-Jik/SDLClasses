@@ -143,11 +143,11 @@
     <ClInclude Include="..\include\Library.h" />
     <ClInclude Include="..\include\MouseState.h" />
     <ClInclude Include="..\include\Surface.h" />
-    <ClInclude Include="..\include\Vector2S32.h" />
-    <ClInclude Include="..\include\Vector4S32.h" />
+    <ClInclude Include="..\include\Vector2.h" />
+    <ClInclude Include="..\include\Vector3.h" />
+    <ClInclude Include="..\include\Vector4.h" />
     <ClInclude Include="..\include\SDL.h" />
     <ClInclude Include="..\include\SDLError.h" />
-    <ClInclude Include="..\include\Vector4U8.h" />
     <ClInclude Include="..\include\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

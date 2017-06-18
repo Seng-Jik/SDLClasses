@@ -3,7 +3,7 @@
 #include "..\include\GLContext.h"
 
 using std::any_cast;
-SDL::Window::Window(const string & title, Rect r, WindowFlag flags)
+SDL::Window::Window(const string & title, Rect<int32_t> r, WindowFlag flags)
 	:
 	windowHandler_(
 		SDL_CreateWindow(

@@ -2,7 +2,6 @@
 #include "CppUnitTest.h"
 #include <SDL.h>
 #include <Library.h>
-#include <Vector4U8.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include "..\include\MouseState.h"
 #include "..\include\SDLError.h"
-#include "..\include\Vector4U8.h"
+#include "..\include\Vector3.h"
 
 
 using std::string;
@@ -25,11 +25,11 @@ void SDL::SDL::SetHint(const string & hint, const string & value)
 		throw SDLError();
 }
 
-SDL::Vector4U8 SDL::SDL::GetVersion() const
+SDL::Vector3<uint8_t> SDL::SDL::GetVersion() const
 {
 	SDL_version ver;
 	SDL_GetVersion(&ver);
-	return Vector4U8{ ver.major,ver.minor,ver.patch,0 };
+	return Vector3<uint8_t>{ ver.major,ver.minor,ver.patch };
 }
 
 void SDL::SDL::ProcessEvents()
