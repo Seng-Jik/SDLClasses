@@ -1,13 +1,13 @@
 #pragma once
 #include <string>
 #include <any>
-#include "Vector4.h"
 #include "Surface.h"
 
 namespace SDL
 {
 	using std::string;
 
+	template<typename T> struct Vector4;
 	class GLContext;
 
 	class Window
