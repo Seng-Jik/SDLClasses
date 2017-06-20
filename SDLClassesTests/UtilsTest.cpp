@@ -89,7 +89,7 @@ namespace SDLClassesTests
 
 		TEST_METHOD(PropertySetOnlyTest)
 		{
-			/*using namespace SDL;
+			using namespace SDL;
 			int v = 0;
 			Set<int> vp(v);
 			vp = 150;
@@ -99,12 +99,12 @@ namespace SDLClassesTests
 			ClassForTest o(1);
 			Set<ClassForTest> obj(o); //default ctor
 			obj = ClassForTest(150);	//move =
-			obj = o;*/
+			obj = o;
 		}
 
 		TEST_METHOD(PropertyGetSetTest)
 		{
-			/*using namespace SDL;
+			using namespace SDL;
 			int p = 150;
 			GetSet<int> vp(p);
 
@@ -118,7 +118,7 @@ namespace SDLClassesTests
 
 			GetSet<int> codeTest(
 				[&]() ->int& {return p; },
-				[&p](int&& value) ->void {p = value; }
+				[&p](const int& value) ->void {p = value; }
 			);
 
 			codeTest = 950;
@@ -127,7 +127,8 @@ namespace SDLClassesTests
 
 			ClassForTest o(1);
 			GetSet<ClassForTest> obj(o); //default ctor
-			obj = ClassForTest(150);	//move =*/
+			obj = ClassForTest(150);	//move =
+			obj = o;	//copy =
 		}
 	};
 }

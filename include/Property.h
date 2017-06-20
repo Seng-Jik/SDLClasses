@@ -1,11 +1,12 @@
 #pragma once
 
 #include <functional>
-#include <type_traits>
 
 namespace SDL
 {
 	using std::function;
+	using std::forward;
+	using std::move;
 
 	template<typename T>
 	class Auto
@@ -18,10 +19,11 @@ namespace SDL
 		operator T&();
 		operator const T&() const;
 
-		void SetValue(T&&);
-		void SetValue(const T&);
-		const T& operator = (T&&);
-		const T& operator = (const T&);
+		template<typename Arg>
+		void SetValue(Arg&&);
+
+		template<typename Arg>
+		const T& operator = (Arg&&);
 	private:
 		T value_;
 
@@ -36,7 +38,7 @@ namespace SDL
 	{
 	public:
 		explicit Get(T& boundObject);
-		Get(function<T&()>&& getter);
+		Get(const function<T&()>& getter);
 
 		T& GetVal();
 		const T& GetConst() const;
@@ -56,21 +58,22 @@ namespace SDL
 	{
 	public:
 		explicit Set(T& boundObject);
-		Set(function<void(const T&)>&& setter);
-		Set(function<void(const T&)>&& setter,function<void(T&&)>&& setterForMove);
+		Set(const function<void(const T&)>& setter);
+		Set(const function<void(const T&)>& setter,const function<void(T&&)>& setterForMove);
 
 		void SetValue(T&&);
 		void SetValue(const T&);
 		const T& operator=(T&&);
 		const T& operator=(const T&);
+
+		const Set& operator=(Set&&) = delete;
+		const Set& operator=(const Set&) = delete;
 	private:
 		function<void(const T&)> copySetter_;
 		function<void(T&&)> moveSetter_;
 
-		Set(const Set&) = delete;
 		Set(Set&&) = delete;
-		const Set& operator=(Set&&) = delete;
-		const Set& operator=(const Set&) = delete;
+		Set(const Set&) = delete;
 	};
 
 	template<typename T>
@@ -78,9 +81,12 @@ namespace SDL
 		public Get<T>,
 		public Set<T>
 	{
+	public:
 		explicit GetSet(T& boundObject);
-		GetSet(function<T&()>&& getter, function<void(const T&)>&& setter);
-		GetSet(function<T&()>&& getter, function<void(const T&)>&& setter, function<void(T&&)>&& setterForMove);
+		GetSet(const function<T&()>& getter, const function<void(const T&)>& setter);
+		GetSet(const function<T&()>& getter, const function<void(const T&)>& setter, const function<void(T&&)>& setterForMove);
+
+		using Set<T>::operator =;
 	};
 
 
@@ -105,12 +111,6 @@ namespace SDL
 	}
 
 	template<typename T>
-	inline void Auto<T>::SetValue(T && value)
-	{
-		value_ = std::move(value);
-	}
-
-	template<typename T>
 	inline T & Auto<T>::GetVal()
 	{
 		return value_;
@@ -122,24 +122,20 @@ namespace SDL
 		return value_;
 	}
 
+
 	template<typename T>
-	inline const T& Auto<T>::operator = (T&& value)
+	template<typename Arg>
+	inline const T& Auto<T>::operator = (Arg&& value)
 	{
-		SetValue(std::move(value));
+		SetValue(forward<Arg>(value));
 		return GetVal();
 	}
 
 	template<typename T>
-	inline const T& Auto<T>::operator = (const T& value)
+	template<typename Arg>
+	inline void Auto<T>::SetValue(Arg && value)
 	{
-		SetValue(value);
-		return GetVal();
-	}
-
-	template<typename T>
-	inline void Auto<T>::SetValue(const T& value)
-	{
-		value_ = value;
+		value_ = forward<Arg>(value);
 	}
 
 	/* Get */
@@ -151,9 +147,9 @@ namespace SDL
 	}
 
 	template<typename T>
-	inline Get<T>::Get(function<T&()>&& getter)
+	inline Get<T>::Get(const function<T&()>& getter):
+		getter_(getter)
 	{
-		getter_ = getter;
 	}
 
 	template<typename T>
@@ -177,6 +173,73 @@ namespace SDL
 	inline Get<T>::operator const T&() const
 	{
 		return GetConst();
+	}
+
+	/* Set */
+
+	template<typename T>
+	inline Set<T>::Set(T & boundObject):
+		Set([&boundObject](const T& obj)->void {boundObject = obj; }, [&boundObject](T&& obj)->void {boundObject = move(obj); })
+	{
+	}
+
+	template<typename T>
+	inline Set<T>::Set(const function<void(const T&)>& setter):
+		Set(setter, [this](T&& value)->void {copySetter_(value); })
+	{
+	}
+
+	template<typename T>
+	inline Set<T>::Set(const function<void(const T&)>& setter, const function<void(T&&)>& setterForMove) :
+		copySetter_(setter), moveSetter_(setterForMove)
+	{
+	}
+
+	template<typename T>
+	inline void Set<T>::SetValue(T && value)
+	{
+		moveSetter_(move(value));
+	}
+
+	template<typename T>
+	inline void Set<T>::SetValue(const T & value)
+	{
+		copySetter_(value);
+	}
+
+	template<typename T>
+	inline const T & SDL::Set<T>::operator=(T && value)
+	{
+		SetValue(move(value));
+		return value;
+	}
+
+	template<typename T>
+	inline const T & SDL::Set<T>::operator=(const T & value)
+	{
+		SetValue(value);
+		return value;
+	}
+
+	/* GetSet */
+	template<typename T>
+	inline GetSet<T>::GetSet(T & boundObject):
+		Get(boundObject),Set(boundObject)
+	{
+	}
+
+	template<typename T>
+	inline GetSet<T>::GetSet(const function<T&()>& getter, const function<void(const T&)>& setter):
+		Get(getter),
+		Set(setter)
+	{
+	}
+
+	template<typename T>
+	inline GetSet<T>::GetSet(const function<T&()>& getter, const function<void(const T&)>& setter, const function<void(T&&)>& setterForMove):
+		Get(getter),
+		Set(setter,setterForMove)
+	{
 	}
 
 }
