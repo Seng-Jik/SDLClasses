@@ -13,8 +13,8 @@ namespace SDLClassesTests
 		TEST_METHOD(PropertyTest)
 		{
 			using namespace SDL;
-			Property<int> i = 0;
-			Assert::AreEqual(0, i.Get());
+			Auto<int> i = 0;
+			Assert::AreEqual(0, i.GetValue());
 
 			i = 150;
 			Assert::AreEqual(150, static_cast<int>(i));
@@ -27,29 +27,29 @@ namespace SDLClassesTests
 		{
 			using namespace SDL;
 			int org = 150;
-			PropertyGetOnly<int> i = org;
-			Assert::AreEqual(i.Get(), 150);
+			Get<int> i = org;
+			Assert::AreEqual(i.GetValue(), 150);
 
-			i.Get() = 200;
+			i.GetValue() = 200;
 			Assert::AreEqual(org, 200);
 
 			int org_const = 250;
-			PropertyGetOnly<const int> ci = org_const;
+			Get<const int> ci = org_const;
 
-			Assert::AreEqual(250, ci.Get());
+			Assert::AreEqual(250, ci.GetValue());
 
 			org_const = 300;
 			Assert::AreEqual(300, static_cast<const int>(ci));
 
-			PropertyGetOnly<const int> b = 150;
-			Assert::AreEqual(150, b.Get());
+			Get<const int> b = 150;
+			Assert::AreEqual(150, b.GetValue());
 		}
 
 		TEST_METHOD(PropertySetOnlyTest)
 		{
 			using namespace SDL;
 			int v = 0;
-			PropertySetOnly<int> vp = v;
+			Set<int> vp = v;
 			vp = 150;
 
 			Assert::AreEqual(150, v);
@@ -59,7 +59,7 @@ namespace SDLClassesTests
 		{
 			using namespace SDL;
 			int p = 150;
-			PropertyGetSet<int> vp = p;
+			GetSet<int> vp = p;
 
 			p += 20;
 			Assert::AreEqual(150 + 20, static_cast<int>(vp));
@@ -69,7 +69,7 @@ namespace SDLClassesTests
 			Assert::AreEqual(p, 50);
 
 
-			PropertyGetSet<int> codeTest(
+			GetSet<int> codeTest(
 				[&]() ->int& {return p; },
 				[&p](int value) ->void {p = value; },
 				[&p](int value) ->void {p = value; }
