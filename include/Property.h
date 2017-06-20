@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <type_traits>
 
 namespace SDL
 {
@@ -10,252 +11,172 @@ namespace SDL
 	class Auto
 	{
 	public:
-		Auto() = default;
-		Auto(const T&);
-		Auto(T&&);
+		Auto(T&& value...);
 
-		Auto(const Auto<T>&) = delete;
-		Auto(Auto<T>&&) = delete;
-		const Auto<T>& operator = (const Auto<T>&) = delete;
-		const Auto<T>& operator = (Auto<T>&&) = delete;
-
-		T& GetValue();
-		const T& GetConstValue() const;
+		T& GetVal();
+		const T& GetConst() const;
 		operator T&();
 		operator const T&() const;
 
-		void SetValue(const T&);
 		void SetValue(T&&);
-		const T& operator = (const T&);
+		void SetValue(const T&);
 		const T& operator = (T&&);
-
+		const T& operator = (const T&);
 	private:
 		T value_;
+
+		Auto(const Auto&) = delete;
+		Auto(Auto&&) = delete;
+		const Auto& operator=(Auto&&) = delete;
+		const Auto& operator=(const Auto&) = delete;
 	};
 
 	template<typename T>
 	class Get
 	{
 	public:
-		Get(T&);
-		Get(const function<T&()>& getter);
+		explicit Get(T& boundObject);
+		Get(function<T&()>&& getter);
 
-		Get(const Get<T>&) = delete;
-		Get(Get<T>&&) = delete;
-		const Get<T>& operator = (const Get<T>&) = delete;
-		const Get<T>& operator = (Get<T>&&) = delete;
-
-		T& GetValue();
-		const T& GetConstValue() const;
+		T& GetVal();
+		const T& GetConst() const;
 		operator T&();
 		operator const T&() const;
 	private:
 		function<T&()> getter_;
+
+		Get(const Get&) = delete;
+		Get(Get&&) = delete;
+		const Get& operator=(Get&&) = delete;
+		const Get& operator=(const Get&) = delete;
 	};
 
 	template<typename T>
 	class Set
 	{
 	public:
-		Set(T&);
-		Set(function<void(const T&)> copySetter);
-		Set(function<void(const T&)> copySetter, function<void(T&&)> moveSetter);
+		explicit Set(T& boundObject);
+		Set(function<void(const T&)>&& setter);
+		Set(function<void(const T&)>&& setter,function<void(T&&)>&& setterForMove);
 
-		Set(const Set<T>&) = delete;
-		Set(Set<T>&&) = delete;
-		const Set<T>& operator = (const Set<T>&) = delete;
-		const Set<T>& operator = (Set<T>&&) = delete;
-
-		void SetValue(const T&);
 		void SetValue(T&&);
-		const T& operator = (const T&);
-		const T& operator = (T&&);
+		void SetValue(const T&);
+		const T& operator=(T&&);
+		const T& operator=(const T&);
 	private:
 		function<void(const T&)> copySetter_;
 		function<void(T&&)> moveSetter_;
+
+		Set(const Set&) = delete;
+		Set(Set&&) = delete;
+		const Set& operator=(Set&&) = delete;
+		const Set& operator=(const Set&) = delete;
 	};
 
 	template<typename T>
-	class GetSet :
+	class GetSet:
 		public Get<T>,
 		public Set<T>
 	{
-	public:
-		GetSet(T&);
-		GetSet(const function<T&()>& getter, function<void(const T&)> copySetter);
-		GetSet(const function<T&()>& getter, function<void(const T&)> copySetter, function<void(T&&)> moveSetter);
-
-		GetSet(const GetSet<T>&) = delete;
-		GetSet(GetSet<T>&&) = delete;
-		const GetSet<T>& operator = (const GetSet<T>&) = delete;
-		const GetSet<T>& operator = (GetSet<T>&&) = delete;
-
-		using Set<T>::operator=;
+		explicit GetSet(T& boundObject);
+		GetSet(function<T&()>&& getter, function<void(const T&)>&& setter);
+		GetSet(function<T&()>&& getter, function<void(const T&)>&& setter, function<void(T&&)>&& setterForMove);
 	};
 
 
-	/* Propterty */
-	template<typename T>
-	inline Auto<T>::Auto(const T & value)
-	{
-		SetValue(value);
-	}
+	/* Auto */
 
 	template<typename T>
-	inline Auto<T>::Auto(T && value)
+	inline Auto<T>::Auto(T && value...):
+		value_(std::move(value))
 	{
-		SetValue(value);
 	}
 
 	template<typename T>
 	inline Auto<T>::operator T&()
 	{
-		return GetValue();
+		return GetVal();
 	}
 
 	template<typename T>
 	inline Auto<T>::operator const T&() const
 	{
-		return GetConstValue();
-	}
-
-	template<typename T>
-	inline void Auto<T>::SetValue(const T & value)
-	{
-		value_ = value;
+		return GetConst();
 	}
 
 	template<typename T>
 	inline void Auto<T>::SetValue(T && value)
 	{
-		value_ = value;
+		value_ = std::move(value);
 	}
 
 	template<typename T>
-	inline T & Auto<T>::GetValue()
+	inline T & Auto<T>::GetVal()
 	{
 		return value_;
 	}
 
 	template<typename T>
-	inline const T & Auto<T>::GetConstValue() const
+	inline const T & Auto<T>::GetConst() const
 	{
 		return value_;
+	}
+
+	template<typename T>
+	inline const T& Auto<T>::operator = (T&& value)
+	{
+		SetValue(std::move(value));
+		return GetVal();
 	}
 
 	template<typename T>
 	inline const T& Auto<T>::operator = (const T& value)
 	{
 		SetValue(value);
-		return GetValue();
+		return GetVal();
 	}
 
 	template<typename T>
-	inline const T& Auto<T>::operator = (T&& value)
+	inline void Auto<T>::SetValue(const T& value)
 	{
-		SetValue(value);
-		return GetValue();
+		value_ = value;
 	}
 
-	/* Property Get Only */
+	/* Get */
 
 	template<typename T>
-	inline Get<T>::Get(T & value)
-		:Get([&value]() -> T& { return value; })
+	inline Get<T>::Get(T & boundObject)
+		:Get([&boundObject]() -> T& { return boundObject; })
 	{
 	}
 
 	template<typename T>
-	inline Get<T>::Get(const function<T&()>& getter)
+	inline Get<T>::Get(function<T&()>&& getter)
 	{
 		getter_ = getter;
 	}
 
 	template<typename T>
-	inline T & Get<T>::GetValue()
+	inline T & Get<T>::GetVal()
 	{
 		return getter_();
 	}
+
 	template<typename T>
-	inline const T & Get<T>::GetConstValue() const
+	inline const T & Get<T>::GetConst() const
 	{
 		return getter_();
 	}
 	template<typename T>
 	inline Get<T>::operator T&()
 	{
-		return GetValue();
+		return GetVal();
 	}
 
 	template<typename T>
 	inline Get<T>::operator const T&() const
 	{
-		return GetConstValue();
+		return GetConst();
 	}
 
-	/* Property Set Only */
-	template<typename T>
-	inline Set<T>::Set(T & ref)
-		:Set([&ref](const T& value) -> void { ref = value; })
-	{
-	}
-
-	template<typename T>
-	inline Set<T>::Set(function<void(const T&)> copySetter)
-		: Set(copySetter, [this](T&& t) { copySetter_(t); })
-	{
-	}
-
-	template<typename T>
-	inline Set<T>::Set(function<void(const T&)> copySetter, function<void(T&&)> moveSetter)
-	{
-		copySetter_ = copySetter;
-		moveSetter_ = moveSetter;
-	}
-
-	template<typename T>
-	inline void Set<T>::SetValue(const T & value)
-	{
-		copySetter_(value);
-	}
-
-	template<typename T>
-	inline void Set<T>::SetValue(T && value)
-	{
-		moveSetter_(value);
-	}
-
-	template<typename T>
-	inline const T & Set<T>::operator=(const T & value)
-	{
-		SetValue(value);
-		return value;
-	}
-
-	template<typename T>
-	inline const T & Set<T>::operator=(T && value)
-	{
-		SetValue(value);
-		return value;
-	}
-
-	/* Property Get Set */
-
-	template<typename T>
-	inline GetSet<T>::GetSet(T & ref)
-		:Get(ref), Set(ref)
-	{
-	}
-
-	template<typename T>
-	inline GetSet<T>::GetSet(const function<T&()>& getter, function<void(const T&)> copySetter)
-		: Get(getter), Set(copySetter)
-	{
-	}
-
-	template<typename T>
-	inline GetSet<T>::GetSet(const function<T&()>& getter, function<void(const T&)> copySetter, function<void(T&&)> moveSetter)
-		: Get(getter), Set(copySetter, moveSetter)
-	{
-	}
 }

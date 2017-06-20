@@ -14,5 +14,5 @@ void Log(const char* format, ...)
 	_vsnprintf_s(buf, sizeof(buf) - 1, format, args);
 	va_end(args);
 
-	logger.WriteMessage(buf);
+	logger.WriteMessage((std::string(buf) + '\n').c_str());
 }
