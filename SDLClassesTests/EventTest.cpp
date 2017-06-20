@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include <Vector4.h>
 #include <Vector2.h>
 #include <Window.h>
 #include <SDL.h>

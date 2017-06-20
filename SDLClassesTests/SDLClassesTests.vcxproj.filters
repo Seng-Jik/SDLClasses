@@ -47,5 +47,8 @@
     <ClCompile Include="EventTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="UtilsTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

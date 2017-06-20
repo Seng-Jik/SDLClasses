@@ -142,6 +142,7 @@
     <ClInclude Include="..\include\Guard.h" />
     <ClInclude Include="..\include\Library.h" />
     <ClInclude Include="..\include\MouseState.h" />
+    <ClInclude Include="..\include\Property.h" />
     <ClInclude Include="..\include\Surface.h" />
     <ClInclude Include="..\include\Vector2.h" />
     <ClInclude Include="..\include\Vector3.h" />

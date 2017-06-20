@@ -174,6 +174,7 @@
     </ClCompile>
     <ClCompile Include="SDLTest.cpp" />
     <ClCompile Include="SurfaceTest.cpp" />
+    <ClCompile Include="UtilsTest.cpp" />
     <ClCompile Include="WindowTest.cpp" />
   </ItemGroup>
   <ItemGroup>

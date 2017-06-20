@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include "..\include\Vector4.h"
 #include "..\include\Window.h"
 #include "..\include\GLContext.h"
 

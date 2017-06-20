@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include <SDL.h>
 #include <Window.h>
+#include <Vector4.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
