@@ -21,6 +21,10 @@ namespace SDLClassesTests
 
 			int p = i + 5;
 			Assert::AreEqual(150 + 5, p);
+
+			i = 99;
+			Assert::AreEqual(99, i.GetConstValue());
+			Assert::AreEqual(99, static_cast<const int>(i));
 		}
 
 		TEST_METHOD(PropertyGetOnlyTest)
@@ -32,6 +36,8 @@ namespace SDLClassesTests
 
 			i.GetValue() = 200;
 			Assert::AreEqual(org, 200);
+			Assert::AreEqual(org, i.GetConstValue());
+			Assert::AreEqual(org, static_cast<const int>(i));
 
 			int org_const = 250;
 			Get<const int> ci = org_const;

@@ -20,7 +20,9 @@ namespace SDL
 		const Auto<T>& operator = (Auto<T>&&) = delete;
 
 		T& GetValue();
+		const T& GetConstValue() const;
 		operator T&();
+		operator const T&() const;
 
 		void SetValue(const T&);
 		void SetValue(T&&);
@@ -44,7 +46,9 @@ namespace SDL
 		const Get<T>& operator = (Get<T>&&) = delete;
 
 		T& GetValue();
+		const T& GetConstValue() const;
 		operator T&();
+		operator const T&() const;
 	private:
 		function<T&()> getter_;
 	};
@@ -110,6 +114,12 @@ namespace SDL
 	}
 
 	template<typename T>
+	inline Auto<T>::operator const T&() const
+	{
+		return GetConstValue();
+	}
+
+	template<typename T>
 	inline void Auto<T>::SetValue(const T & value)
 	{
 		value_ = value;
@@ -123,6 +133,12 @@ namespace SDL
 
 	template<typename T>
 	inline T & Auto<T>::GetValue()
+	{
+		return value_;
+	}
+
+	template<typename T>
+	inline const T & Auto<T>::GetConstValue() const
 	{
 		return value_;
 	}
@@ -161,9 +177,20 @@ namespace SDL
 		return getter_();
 	}
 	template<typename T>
+	inline const T & Get<T>::GetConstValue() const
+	{
+		return getter_();
+	}
+	template<typename T>
 	inline Get<T>::operator T&()
 	{
 		return GetValue();
+	}
+
+	template<typename T>
+	inline Get<T>::operator const T&() const
+	{
+		return GetConstValue();
 	}
 
 	/* Property Set Only */
