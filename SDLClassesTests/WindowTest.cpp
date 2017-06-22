@@ -18,7 +18,7 @@ namespace SDLClassesTests
 			using namespace SDL;
 			::SDL::SDL sdl;
 			Window wnd("HelloWorld", Rect<int32_t>{ Window::Center,Window::Center,1024,768 }, Window::WindowFlag::Null);
-			sdl.Delay(3000);
+			sdl.Delay(500);
 		}
 
 		TEST_METHOD(SimpleMessageBox)

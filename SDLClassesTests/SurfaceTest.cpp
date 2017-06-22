@@ -27,7 +27,7 @@ namespace SDLClassesTests
 			};
 			sur.Fill(rects, Color<uint8_t>{ 255,0,0,255 });
 			wnd.UpdateWindowSurface();
-			sdl.Delay(3000);
+			sdl.Delay(500);
 
 			sur.Shade([](int x, int y, Surface& thisSur, Color<uint8_t> oldColor) {
 				return Color<uint8_t>
@@ -39,7 +39,7 @@ namespace SDLClassesTests
 				};
 			});
 			wnd.UpdateWindowSurface();
-			sdl.Delay(3000);
+			sdl.Delay(500);
 
 		}
 

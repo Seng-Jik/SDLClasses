@@ -68,8 +68,5 @@
     <ClInclude Include="..\include\Vector3.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Property.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

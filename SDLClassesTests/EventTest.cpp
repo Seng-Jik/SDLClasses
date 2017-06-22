@@ -23,9 +23,9 @@ namespace SDLClassesTests
 			auto& sur = wnd.GetWindowSurface();
 
 			bool bRun = true;
+			int b = 5000;
 
-
-			while (bRun) {
+			while (bRun && b--) {
 				sdl.ProcessEvents();
 				
 				auto mouse = sdl.GetMouseState();

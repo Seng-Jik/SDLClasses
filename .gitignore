@@ -23,3 +23,5 @@ $RECYCLE.BIN/
 /.vs/SDLClasses/v15
 /.vs/slnx.sqlite
 /SDL2-2.0.5
+/Release
+/x64/Debug
