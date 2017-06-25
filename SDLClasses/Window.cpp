@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_syswm.h>
 #include "..\include\Vector4.h"
 #include "..\include\Window.h"
 #include "..\include\GLContext.h"
@@ -32,6 +33,22 @@ SDL::Window::~Window()
 void SDL::Window::UpdateWindowSurface() const
 {
 	SDL_UpdateWindowSurface(any_cast<SDL_Window*>(windowHandler_));
+}
+
+std::any SDL::Window::GetHWND()
+{
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	if (SDL_GetWindowWMInfo(std::any_cast<SDL_Window*>(windowHandler_), &wmInfo))
+	{
+		if (wmInfo.subsystem == SDL_SYSWM_WINDOWS)
+		{
+			HWND i = wmInfo.info.win.window;
+			return i;
+		}
+	}
+	throw std::runtime_error("Can not get HWND.");
+	
 }
 
 void SDL::Window::ShowSimpleMessageBox(const string & title, const string & msg) const
