@@ -2,7 +2,7 @@
 #include <exception>
 #include <string>
 
-namespace SDL 
+namespace SDL
 {
 	class SDLError :
 		public std::exception

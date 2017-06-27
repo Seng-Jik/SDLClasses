@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 
-namespace SDL 
+namespace SDL
 {
 	class Library
 	{
@@ -24,7 +24,4 @@ namespace SDL
 	private:
 		void* libraryHandle_;
 	};
-
-
 }
-

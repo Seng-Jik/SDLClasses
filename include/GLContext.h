@@ -17,4 +17,3 @@ namespace SDL {
 		std::any contextHandler_;
 	};
 }
-

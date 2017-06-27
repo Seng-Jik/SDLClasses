@@ -14,9 +14,9 @@ namespace SDL
 	class Surface
 	{
 	public:
-		Surface(std::any&& surfaceStruct,bool destoryByClass);
+		Surface(std::any&& surfaceStruct, bool destoryByClass);
 		Surface(const std::string& bmpFile);
-		Surface(void* bmpFileInMemory,size_t size);
+		Surface(void* bmpFileInMemory, size_t size);
 		Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);
 		Surface(const Surface&) = delete;
 		Surface(Surface&&) = default;
@@ -27,7 +27,7 @@ namespace SDL
 		bool Available();
 		void SaveBMP(const std::string& file);
 
-		void Shade(std::function<Color<uint8_t>(int x,int y,Surface& thisSurface,Color<uint8_t> nowColor)>);
+		void Shade(std::function<Color<uint8_t>(int x, int y, Surface& thisSurface, Color<uint8_t> nowColor)>);
 		void Fill(const Rect<int32_t>&, Color<uint8_t>);
 		void Fill(const std::vector<Rect<int32_t>>&, Color<uint8_t>);
 		void Clear(Color<uint8_t>);

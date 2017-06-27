@@ -3,7 +3,7 @@
 #include <functional>
 #include <string>
 
-namespace SDL 
+namespace SDL
 {
 	using std::string;
 	template<typename T> struct Vector3;
@@ -12,8 +12,8 @@ namespace SDL
 	class SDL
 	{
 	public:
-		
-		enum class InitParam : uint32_t 
+
+		enum class InitParam : uint32_t
 		{
 			Timer = 0x00000001u,
 			Audio = 0x00000010u,
@@ -22,8 +22,8 @@ namespace SDL
 			Haptic = 0x00001000u,
 			GameController = 0x00002000u,
 			Events = 0x00004000u,
-			Everything = 
-				Timer | Audio | Video | Joystick | Haptic | GameController | Events,
+			Everything =
+			Timer | Audio | Video | Joystick | Haptic | GameController | Events,
 		};
 
 		SDL(InitParam = InitParam::Everything);

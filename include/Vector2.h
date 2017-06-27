@@ -7,5 +7,4 @@ namespace SDL
 	{
 		T x, y;
 	};
-
 }

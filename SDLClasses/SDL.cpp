@@ -4,7 +4,6 @@
 #include "..\include\SDLError.h"
 #include "..\include\Vector3.h"
 
-
 using std::string;
 
 SDL::SDL::SDL(InitParam param)
@@ -29,7 +28,7 @@ SDL::Vector3<uint8_t> SDL::SDL::GetVersion() const
 {
 	SDL_version ver;
 	SDL_GetVersion(&ver);
-	return Vector3<uint8_t>{ ver.major,ver.minor,ver.patch };
+	return Vector3<uint8_t>{ ver.major, ver.minor, ver.patch };
 }
 
 void SDL::SDL::ProcessEvents()
@@ -49,7 +48,7 @@ bool SDL::SDL::KeyPressed(const string & keyName) const
 SDL::MouseState SDL::SDL::GetMouseState() const
 {
 	MouseState state;
-	auto buttonStates = SDL_GetMouseState(&state.position.x,&state.position.y);
+	auto buttonStates = SDL_GetMouseState(&state.position.x, &state.position.y);
 	state.leftButton = buttonStates & SDL_BUTTON(SDL_BUTTON_LEFT);
 	state.rightButton = buttonStates & SDL_BUTTON(SDL_BUTTON_RIGHT);
 	state.middleButton = buttonStates & SDL_BUTTON(SDL_BUTTON_MIDDLE);
@@ -90,4 +89,3 @@ void SDL::SDL::EnableScreenSaver(bool b)
 {
 	b ? SDL_EnableScreenSaver() : SDL_DisableScreenSaver();
 }
-

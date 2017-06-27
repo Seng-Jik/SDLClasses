@@ -24,7 +24,7 @@ namespace SDL
 
 		static const int32_t Center = -1;
 
-		Window(const string& title,Rect<int32_t> rectangle, WindowFlag);
+		Window(const string& title, Rect<int32_t> rectangle, WindowFlag);
 		Window(const Window&) = delete;
 		Window(Window&&) = delete;
 		~Window();
@@ -43,4 +43,3 @@ namespace SDL
 		Surface windowSurface_;
 	};
 }
-

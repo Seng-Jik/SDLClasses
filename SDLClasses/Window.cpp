@@ -12,7 +12,7 @@ SDL::Window::Window(const string & title, Rect<int32_t> r, WindowFlag flags)
 			title.c_str(),
 			r.x == Center ? SDL_WINDOWPOS_CENTERED : r.x,
 			r.y == Center ? SDL_WINDOWPOS_CENTERED : r.y,
-			r.w, r.h, 
+			r.w, r.h,
 			static_cast<uint32_t>(flags)
 		)
 	),
@@ -48,7 +48,6 @@ std::any SDL::Window::GetHWND()
 		}
 	}
 	throw std::runtime_error("Can not get HWND.");
-	
 }
 
 void SDL::Window::ShowSimpleMessageBox(const string & title, const string & msg) const

@@ -8,7 +8,7 @@ namespace SDL
 	public:
 		inline Guard(std::function<void()> unlock)
 			:
-			unlock_(unlock) 
+			unlock_(unlock)
 		{}
 
 		inline ~Guard()
