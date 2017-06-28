@@ -8,7 +8,7 @@ using std::string;
 
 SDL::SDL::SDL(InitParam param)
 {
-	SDL_SetMainReady();
+	//SDL_SetMainReady();
 	int err = SDL_Init(static_cast<Uint32>(param));
 	if (err) throw SDLError();
 }
