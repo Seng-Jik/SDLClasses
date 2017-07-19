@@ -1,5 +1,5 @@
-#include "Keyboard.h"
-#include "SDLError.h"
+#include "..\include\Keyboard.h"
+#include "..\include\SDLError.h"
 #include <SDL.h>
 
 const uint8_t * SDL::Keyboard::GetKeyboardState(int& keyCount) const

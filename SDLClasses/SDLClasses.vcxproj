@@ -92,6 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <CLanguageStandard>c11</CLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -101,6 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <CLanguageStandard>c11</CLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -112,6 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <CLanguageStandard>c11</CLanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -127,6 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <CLanguageStandard>c11</CLanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -134,12 +138,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\include\Clipboard.cpp" />
-    <ClCompile Include="..\include\Keyboard.cpp" />
-    <ClCompile Include="..\include\Mouse.cpp" />
-    <ClCompile Include="..\include\RWops.cpp" />
+    <ClCompile Include="Clipboard.cpp" />
     <ClCompile Include="GLContext.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Library.cpp" />
+    <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="RWops.cpp" />
     <ClCompile Include="SDL.cpp" />
     <ClCompile Include="SDLError.cpp" />
     <ClCompile Include="Surface.cpp" />

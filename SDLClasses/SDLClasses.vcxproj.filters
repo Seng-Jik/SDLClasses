@@ -33,16 +33,16 @@
     <ClCompile Include="GLContext.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\Mouse.cpp">
+    <ClCompile Include="Clipboard.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\Keyboard.cpp">
+    <ClCompile Include="Keyboard.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\Clipboard.cpp">
+    <ClCompile Include="Mouse.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\RWops.cpp">
+    <ClCompile Include="RWops.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

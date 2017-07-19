@@ -1,5 +1,5 @@
-#include "Clipboard.h"
-#include "SDLError.h"
+#include "..\include\Clipboard.h"
+#include "..\include\SDLError.h"
 #include <SDL.h>
 std::string SDL::Clipboard::GetText()
 {

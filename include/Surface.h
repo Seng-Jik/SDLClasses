@@ -2,6 +2,7 @@
 #include <functional>
 #include <vector>
 #include <string>
+#include "RWops.h"
 
 namespace SDL
 {
@@ -15,16 +16,16 @@ namespace SDL
 		friend class Window;
 	public:
 		Surface(const std::string& bmpFile);
-		Surface(void* bmpFileInMemory, size_t size);
+		Surface(RWops& rw,int size);
 		Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);
 		Surface(const Surface&) = delete;
-		Surface(Surface&&) = default;
+		Surface(Surface&&);
 		~Surface();
-		Surface& operator = (Surface&&) = default;
+		Surface& operator = (Surface&&);
 		Surface& operator = (const Surface&) = delete;
 
-		bool Available();
-		void SaveBMP(const std::string& file);
+		bool Available() const;
+		void SaveBMP(const std::string& file) const;
 
 		void Shade(std::function<Color<uint8_t>(int x, int y, Surface& thisSurface, Color<uint8_t> nowColor)>);
 		void Fill(const Rect<int32_t>&, Color<uint8_t>);

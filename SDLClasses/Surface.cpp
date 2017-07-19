@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include "..\include\Guard.h"
 
+
 SDL::Surface::Surface(const std::string& bmpFile)
 {
 	surfaceHandle_ = SDL_LoadBMP(bmpFile.c_str());
@@ -12,14 +13,11 @@ SDL::Surface::Surface(const std::string& bmpFile)
 	destoryByClass_ = true;
 }
 
-SDL::Surface::Surface(void * bmpFileInMemory, size_t size)
+SDL::Surface::Surface(RWops & rw,int size)
 {
-	auto rw = SDL_RWFromConstMem(bmpFileInMemory, static_cast<int>(size));
-	if (rw == nullptr) throw SDLError();
-	surfaceHandle_ = SDL_LoadBMP_RW(rw, static_cast<int>(size));
+	surfaceHandle_ = SDL_LoadBMP_RW(static_cast<SDL_RWops*>(rw.rwopsHandle_), static_cast<int>(size));
 	if (!Available()) throw SDLError();
 	destoryByClass_ = true;
-	SDL_RWclose(rw);
 }
 
 SDL::Surface::Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am)
@@ -29,17 +27,22 @@ SDL::Surface::Surface(int width, int height, int depth, int pitch, uint32_t Rm, 
 	destoryByClass_ = true;
 }
 
+SDL::Surface::Surface(Surface && r)
+{
+	*this = std::move(r);
+}
+
 SDL::Surface::~Surface()
 {
 	clear();
 }
 
-bool SDL::Surface::Available()
+bool SDL::Surface::Available() const
 {
 	return static_cast<SDL_Surface*>(surfaceHandle_) != nullptr;
 }
 
-void SDL::Surface::SaveBMP(const std::string & file)
+void SDL::Surface::SaveBMP(const std::string & file) const
 {
 	SDL_SaveBMP(static_cast<SDL_Surface*>(surfaceHandle_), file.c_str());
 }
@@ -136,4 +139,12 @@ void SDL::Surface::clear()
 		SDL_FreeSurface(static_cast<SDL_Surface*>(surfaceHandle_));
 	surfaceHandle_ = nullptr;
 	destoryByClass_ = false;
+}
+
+SDL::Surface & SDL::Surface::operator=(SDL::Surface && r)
+{
+	clear();
+	surfaceHandle_ = r.surfaceHandle_;
+	destoryByClass_ = r.destoryByClass_;
+	r.clear();
 }
