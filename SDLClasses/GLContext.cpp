@@ -4,12 +4,12 @@
 
 SDL::GLContext::~GLContext()
 {
-	SDL_GL_DeleteContext(std::any_cast<SDL_GLContext>(contextHandler_));
+	SDL_GL_DeleteContext(contextHandler_);
 }
 
-SDL::GLContext::GLContext(std::any windowHandler)
+SDL::GLContext::GLContext(void* windowHandler)
 {
-	contextHandler_ = SDL_GL_CreateContext(std::any_cast<SDL_Window*>(windowHandler));
-	if (std::any_cast<SDL_GLContext>(contextHandler_) == nullptr)
+	contextHandler_ = SDL_GL_CreateContext(static_cast<SDL_Window*>(windowHandler));
+	if (contextHandler_ == nullptr)
 		throw SDLError();
 }

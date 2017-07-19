@@ -3,7 +3,7 @@
 
 namespace SDL
 {
-	class Library
+	class Library final
 	{
 	private:
 		void* loadFunction(const std::string& funcName) const;

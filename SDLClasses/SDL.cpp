@@ -36,25 +36,6 @@ void SDL::SDL::ProcessEvents()
 	SDL_PumpEvents();
 }
 
-bool SDL::SDL::KeyPressed(const string & keyName) const
-{
-	auto scanCode = SDL_GetScancodeFromName(keyName.c_str());
-	if (scanCode == SDL_SCANCODE_UNKNOWN) throw std::exception(("Unknow key:" + keyName).c_str());
-	auto states = SDL_GetKeyboardState(nullptr);
-	if (states == nullptr) throw SDLError();
-	return states[scanCode] != 0;
-}
-
-SDL::MouseState SDL::SDL::GetMouseState() const
-{
-	MouseState state;
-	auto buttonStates = SDL_GetMouseState(&state.position.x, &state.position.y);
-	state.leftButton = buttonStates & SDL_BUTTON(SDL_BUTTON_LEFT);
-	state.rightButton = buttonStates & SDL_BUTTON(SDL_BUTTON_RIGHT);
-	state.middleButton = buttonStates & SDL_BUTTON(SDL_BUTTON_MIDDLE);
-	return state;
-}
-
 bool SDL::SDL::QuitRequested() const
 {
 	return SDL_QuitRequested();
@@ -73,11 +54,6 @@ uint64_t SDL::SDL::GetPerformanceFrequency() const
 uint64_t SDL::SDL::GetPerformanceCounter() const
 {
 	return SDL_GetPerformanceCounter();
-}
-
-void SDL::SDL::SetMouseCursorShow(bool b)
-{
-	SDL_ShowCursor(b);
 }
 
 void SDL::SDL::Delay(uint32_t ms) const

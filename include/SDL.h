@@ -9,7 +9,7 @@ namespace SDL
 	template<typename T> struct Vector3;
 	struct MouseState;
 
-	class SDL
+	class SDL final
 	{
 	public:
 
@@ -37,15 +37,13 @@ namespace SDL
 		Vector3<uint8_t> GetVersion() const;
 
 		void ProcessEvents();
-		bool KeyPressed(const string&) const;
-		MouseState GetMouseState() const;
 		bool QuitRequested() const;
 
 		uint64_t GetTicks() const;
 		uint64_t GetPerformanceFrequency() const;
 		uint64_t GetPerformanceCounter() const;
-		void SetMouseCursorShow(bool);
 		void Delay(uint32_t) const;
+
 		void EnableScreenSaver(bool);
 
 	private:

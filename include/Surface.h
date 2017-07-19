@@ -2,7 +2,6 @@
 #include <functional>
 #include <vector>
 #include <string>
-#include <any>
 
 namespace SDL
 {
@@ -11,10 +10,10 @@ namespace SDL
 	template<typename T> struct Rect;
 	template<typename T> struct Vector2;
 
-	class Surface
+	class Surface final
 	{
+		friend class Window;
 	public:
-		Surface(std::any&& surfaceStruct, bool destoryByClass);
 		Surface(const std::string& bmpFile);
 		Surface(void* bmpFileInMemory, size_t size);
 		Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);
@@ -35,8 +34,9 @@ namespace SDL
 		void BlitFrom(const Surface& from, const Rect<int32_t>& fromRect, const Rect<int32_t>& toRect);
 		Vector2<int32_t> GetSize();
 	private:
+		Surface(void*,bool);
 		void clear();
-		std::any surfaceHandle_;
+		void* surfaceHandle_;
 		bool destoryByClass_;
 	};
 }

@@ -3,7 +3,7 @@
 
 namespace SDL
 {
-	class Guard
+	class Guard final
 	{
 	public:
 		inline Guard(std::function<void()> unlock)

@@ -4,7 +4,7 @@
 
 namespace SDL
 {
-	class SDLError :
+	class SDLError final :
 		public std::exception
 	{
 	public:

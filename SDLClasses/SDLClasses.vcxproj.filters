@@ -33,6 +33,18 @@
     <ClCompile Include="GLContext.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\include\Mouse.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Keyboard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\Clipboard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\RWops.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\SDL.h">
@@ -44,28 +56,40 @@
     <ClInclude Include="..\include\Library.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Window.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Surface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Guard.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\MouseState.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\GLContext.h">
+    <ClInclude Include="..\include\Vector4.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Vector3.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Vector2.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Vector4.h">
+    <ClInclude Include="..\include\GLContext.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Vector3.h">
+    <ClInclude Include="..\include\Surface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Mouse.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Keyboard.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Clipboard.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\RWops.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

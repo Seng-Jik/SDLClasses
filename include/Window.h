@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <any>
 #include "Surface.h"
 
 namespace SDL
@@ -10,7 +9,7 @@ namespace SDL
 	template<typename T> struct Vector4;
 	class GLContext;
 
-	class Window
+	class Window final
 	{
 	public:
 
@@ -33,13 +32,15 @@ namespace SDL
 
 		void UpdateWindowSurface() const;
 		inline Surface& GetWindowSurface() { return windowSurface_; }
-		std::any GetHWND();
+		void* GetHWND();
 
 		void ShowSimpleMessageBox(const string& title, const string& msg) const;
 
+		void SetWindowIcon(const Surface& icon);
+
 		GLContext CreateOpenGLContext();
 	private:
-		std::any windowHandler_;
+		void* windowHandler_;
 		Surface windowSurface_;
 	};
 }

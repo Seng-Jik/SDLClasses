@@ -1,8 +1,7 @@
 #pragma once
-#include <any>
 
 namespace SDL {
-	class GLContext
+	class GLContext final
 	{
 	public:
 		GLContext() = delete;
@@ -13,7 +12,7 @@ namespace SDL {
 		~GLContext();
 	private:
 		friend class Window;
-		GLContext(std::any windowHandler);
-		std::any contextHandler_;
+		GLContext(void* windowHandler);
+		void* contextHandler_;
 	};
 }
