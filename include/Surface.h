@@ -13,8 +13,8 @@ namespace SDL
 
 	class Surface final
 	{
-		friend class Window;
 	public:
+		Surface(void* ptrSDL_Surface, bool autoDestoryByClass);
 		Surface(const std::string& bmpFile);
 		Surface(RWops& rw,int size);
 		Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);
@@ -34,8 +34,10 @@ namespace SDL
 		void SetRLE(bool);
 		void BlitFrom(const Surface& from, const Rect<int32_t>& fromRect, const Rect<int32_t>& toRect);
 		Vector2<int32_t> GetSize();
+
+		const void* GetPtrToSDL_Surface() const;
 	private:
-		Surface(void*,bool);
+		
 		void clear();
 		void* surfaceHandle_;
 		bool destoryByClass_;

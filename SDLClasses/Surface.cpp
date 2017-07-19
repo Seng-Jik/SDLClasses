@@ -15,7 +15,7 @@ SDL::Surface::Surface(const std::string& bmpFile)
 
 SDL::Surface::Surface(RWops & rw,int size)
 {
-	surfaceHandle_ = SDL_LoadBMP_RW(static_cast<SDL_RWops*>(rw.rwopsHandle_), static_cast<int>(size));
+	surfaceHandle_ = SDL_LoadBMP_RW(static_cast<SDL_RWops*>(rw.GetPtrToSDL_RWops()), static_cast<int>(size));
 	if (!Available()) throw SDLError();
 	destoryByClass_ = true;
 }
@@ -127,6 +127,11 @@ SDL::Vector2<int32_t> SDL::Surface::GetSize()
 	return Vector2<int32_t>{sur->w, sur->h};
 }
 
+const void * SDL::Surface::GetPtrToSDL_Surface() const
+{
+	return surfaceHandle_;
+}
+
 SDL::Surface::Surface(void * sur, bool des)
 {
 	surfaceHandle_ = sur;
@@ -147,4 +152,5 @@ SDL::Surface & SDL::Surface::operator=(SDL::Surface && r)
 	surfaceHandle_ = r.surfaceHandle_;
 	destoryByClass_ = r.destoryByClass_;
 	r.clear();
+	return *this;
 }

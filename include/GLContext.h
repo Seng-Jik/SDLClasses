@@ -6,8 +6,8 @@ namespace SDL {
 	public:
 		GLContext() = delete;
 		GLContext(const GLContext&) = delete;
-		GLContext(GLContext&&) = default;
-		GLContext& operator = (GLContext&&) = default;
+		GLContext(GLContext&&) = delete;
+		GLContext& operator = (GLContext&&) = delete;
 		GLContext& operator = (const GLContext&) = delete;
 		~GLContext();
 	private:

@@ -2,6 +2,11 @@
 #include <SDL.h>
 #include "..\include\SDLError.h"
 
+SDL::RWops::RWops(void * ptrSDL_RWops)
+{
+	rwopsHandle_ = ptrSDL_RWops;
+}
+
 SDL::RWops::RWops(void * mem, int size)
 {
 	rwopsHandle_ = static_cast<void*>(SDL_RWFromMem(mem, size));
@@ -28,6 +33,11 @@ SDL::RWops::~RWops()
 bool SDL::RWops::Available() const
 {
 	return rwopsHandle_ != nullptr;
+}
+
+void * SDL::RWops::GetPtrToSDL_RWops()
+{
+	return rwopsHandle_;
 }
 
 size_t SDL::RWops::Read(void * ptr, size_t size, size_t maxnum)
