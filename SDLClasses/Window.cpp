@@ -4,7 +4,7 @@
 #include "..\include\Window.h"
 #include "..\include\GLContext.h"
 
-static SDL::Handler::Deleter winDeleter = [](void* p)
+static void winDeleter(void* p)
 {
 	SDL_DestroyWindow(static_cast<SDL_Window*>(p));
 };

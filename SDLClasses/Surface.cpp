@@ -5,7 +5,7 @@
 #include <SDL.h>
 #include "..\include\Guard.h"
 
-static SDL::Handler::Deleter surDeleter = [](void* sur)
+static void surDeleter(void* sur)
 {
 	SDL_FreeSurface(static_cast<SDL_Surface*>(sur));
 };
