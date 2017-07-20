@@ -1,5 +1,5 @@
 #include "..\include\SDLError.h"
-#include <SDL.h>
+#include <SDL_error.h>
 
 const char * SDL::SDLError::what() const
 {

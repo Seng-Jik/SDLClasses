@@ -1,5 +1,5 @@
 #include "..\include\RWops.h"
-#include <SDL.h>
+#include <SDL_rwops.h>
 #include "..\include\SDLError.h"
 
 static void rwopsDeleter(void* rwops)

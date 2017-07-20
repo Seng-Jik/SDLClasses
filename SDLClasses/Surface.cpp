@@ -2,7 +2,7 @@
 #include "..\include\Vector2.h"
 #include "..\include\Vector4.h"
 #include "..\include\SDLError.h"
-#include <SDL.h>
+#include <SDL_surface.h>
 #include "..\include\Guard.h"
 
 static void surDeleter(void* sur)

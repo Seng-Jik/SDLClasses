@@ -1,6 +1,6 @@
 #include "..\include\Library.h"
 #include "..\include\SDLError.h"
-#include <SDL.h>
+#include <SDL_loadso.h>
 
 using namespace SDL;
 

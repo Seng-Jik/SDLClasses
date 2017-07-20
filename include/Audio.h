@@ -1,6 +1,6 @@
 #pragma once
 #include "Handler.h"
-/* Comming soon
+// Comming soon
 namespace SDL 
 {
 
@@ -18,4 +18,4 @@ namespace SDL
 	private:
 		Handler audioDevice_;
 	};
-}*/
+}

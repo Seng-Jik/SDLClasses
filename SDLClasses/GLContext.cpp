@@ -1,5 +1,5 @@
 #include "..\include\GLContext.h"
-#include <SDL.h>
+#include <SDL_video.h>
 #include "..\include\SDLError.h"
 
 SDL::GLContext::GLContext(void* windowHandler):

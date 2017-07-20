@@ -1,4 +1,5 @@
-#include <SDL.h>
+#include <SDL_video.h>
+#include <SDL_messagebox.h>
 #include <SDL_syswm.h>
 #include "..\include\Vector4.h"
 #include "..\include\Window.h"

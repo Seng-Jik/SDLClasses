@@ -1,6 +1,6 @@
 #include "..\include\Clipboard.h"
 #include "..\include\SDLError.h"
-#include <SDL.h>
+#include <SDL_clipboard.h>
 std::string SDL::Clipboard::GetText()
 {
 	char* text = SDL_GetClipboardText();

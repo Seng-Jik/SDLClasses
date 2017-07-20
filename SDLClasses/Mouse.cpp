@@ -1,5 +1,5 @@
 #include "..\include\Mouse.h"
-#include <SDL.h>
+#include <SDL_mouse.h>
 
 SDL::MouseState SDL::Mouse::GetMouseState() const
 {
