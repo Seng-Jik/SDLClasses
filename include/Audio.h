@@ -3,10 +3,13 @@
 // Comming soon
 namespace SDL 
 {
+	struct AudioFormat
+	{};
 
 	struct AudioSpec
 	{
-
+		AudioFormat format;
+		uint8_t channels;
 	};
 
 	class Audio

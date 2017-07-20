@@ -104,5 +104,11 @@
     <ClInclude Include="..\include\Audio.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Joystick.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Haptic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
