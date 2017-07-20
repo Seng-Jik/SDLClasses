@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Clipboard.cpp" />
     <ClCompile Include="GLContext.cpp" />
     <ClCompile Include="Handler.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Audio.h" />
     <ClInclude Include="..\include\Clipboard.h" />
     <ClInclude Include="..\include\GLContext.h" />
     <ClInclude Include="..\include\Guard.h" />
