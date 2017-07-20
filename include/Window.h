@@ -24,11 +24,6 @@ namespace SDL
 		static const int32_t Center = -1;
 
 		Window(const string& title, Rect<int32_t> rectangle, WindowFlag);
-		Window(const Window&) = delete;
-		Window(Window&&) = delete;
-		~Window();
-		Window& operator = (Window&&) = delete;
-		Window& operator = (const Window&) = delete;
 
 		void UpdateWindowSurface() const;
 		inline Surface& GetWindowSurface() { return windowSurface_; }
@@ -40,7 +35,7 @@ namespace SDL
 
 		GLContext CreateOpenGLContext();
 	private:
-		void* windowHandler_;
+		Handler windowHandler_;
 		Surface windowSurface_;
 	};
 }

@@ -16,11 +16,6 @@ namespace SDL
 			unlock_();
 		}
 
-		Guard(const Guard&) = delete;
-		Guard(Guard&&) = delete;
-		Guard& operator = (Guard&&) = delete;
-		Guard& operator = (const Guard&) = delete;
-
 	private:
 		std::function<void()> unlock_;
 	};

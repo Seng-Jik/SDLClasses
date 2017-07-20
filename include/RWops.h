@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <cstdint>
+#include "Handler.h"
 
 namespace SDL
 {
@@ -13,12 +14,6 @@ namespace SDL
 		RWops(void* mem, int size);
 		RWops(const void* mem, int size);
 		RWops(const string& filePath, const string& mode);
-		~RWops();
-
-		RWops(const RWops&) = delete;
-		RWops(RWops&&);
-		RWops& operator = (RWops&&) = delete;
-		RWops& operator = (const RWops&) = delete;
 
 		bool Available() const;
 
@@ -28,6 +23,6 @@ namespace SDL
 		size_t Write(const void* ptr, size_t size, size_t num);
 		int64_t Tell();
 	private:
-		void* rwopsHandle_;
+		Handler rwopsHandle_;
 	};
 }

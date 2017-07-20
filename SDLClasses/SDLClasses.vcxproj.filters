@@ -45,6 +45,9 @@
     <ClCompile Include="RWops.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Handler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\SDL.h">
@@ -90,6 +93,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\RWops.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Handler.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

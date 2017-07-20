@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "RWops.h"
+#include "Handler.h"
 
 namespace SDL
 {
@@ -14,15 +15,10 @@ namespace SDL
 	class Surface final
 	{
 	public:
-		Surface(void* ptrSDL_Surface, bool autoDestoryByClass);
+		Surface(void* ptrSDL_Surface, bool autoDestoryByClass = true);
 		Surface(const std::string& bmpFile);
 		Surface(RWops& rw,int size);
 		Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);
-		Surface(const Surface&) = delete;
-		Surface(Surface&&);
-		~Surface();
-		Surface& operator = (Surface&&);
-		Surface& operator = (const Surface&) = delete;
 
 		bool Available() const;
 		void SaveBMP(const std::string& file) const;
@@ -38,8 +34,6 @@ namespace SDL
 		const void* GetPtrToSDL_Surface() const;
 	private:
 		
-		void clear();
-		void* surfaceHandle_;
-		bool destoryByClass_;
+		Handler surfaceHandle_;
 	};
 }
