@@ -9,7 +9,7 @@ namespace SDL
 	public:
 		using Deleter = std::function<void(void* ptr)>;
 
-		Handler& operator = (Handler&&);
+		const Handler& operator = (Handler&&);
 		Handler(void* ptr, Deleter deleter);
 		Handler(Handler&& r);
 		~Handler();

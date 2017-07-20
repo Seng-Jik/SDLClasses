@@ -18,7 +18,10 @@ namespace SDL
 		Surface(void* ptrSDL_Surface, bool autoDestoryByClass = true);
 		Surface(const std::string& bmpFile);
 		Surface(RWops& rw,int size);
-		Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);
+		Surface(int width, int height, int depth, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);
+
+		Surface(Surface&&) = delete;
+		const Surface& operator=(Surface&&) = delete;
 
 		bool Available() const;
 		void SaveBMP(const std::string& file) const;

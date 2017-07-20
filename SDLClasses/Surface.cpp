@@ -25,7 +25,7 @@ SDL::Surface::Surface(RWops & rw,int size):
 	if (!Available()) throw SDLError();
 }
 
-SDL::Surface::Surface(int width, int height, int depth, int pitch, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am):
+SDL::Surface::Surface(int width, int height, int depth, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am):
 	surfaceHandle_(SDL_CreateRGBSurface(0, width, height, depth, Rm, Gm, Bm, Am), surDeleter)
 {
 	if (!Available()) throw SDLError();

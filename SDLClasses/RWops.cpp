@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include "..\include\SDLError.h"
 
-static SDL::Handler::Deleter rwopsDeleter = [](void* rwops)
+static void rwopsDeleter(void* rwops)
 {
 	SDL_RWclose(static_cast<SDL_RWops*>(rwops));
 };

@@ -11,7 +11,7 @@ SDL::Handler::Handler(Handler && r)
 	*this = std::move(r);
 }
 
-SDL::Handler& SDL::Handler::operator=(Handler && r)
+const SDL::Handler& SDL::Handler::operator=(Handler && r)
 {
 	ptr_ = r.ptr_;
 	deleter_ = r.deleter_;
