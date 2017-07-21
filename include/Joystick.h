@@ -8,7 +8,7 @@
 namespace SDL
 {
 	using namespace std;
-	class Joystick
+	class Joystick final
 	{
 	public:
 

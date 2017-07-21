@@ -7,7 +7,7 @@
 
 namespace SDL
 {
-	class Handler
+	class Handler final
 	{
 	public:
 		using Deleter = std::function<void(Handler&)>;
