@@ -34,7 +34,7 @@ namespace SDL
 		void BlitFrom(const Surface& from, const Rect<int32_t>& fromRect, const Rect<int32_t>& toRect);
 		Vector2<int32_t> GetSize();
 
-		const void* GetPtrToSDL_Surface() const;
+		const Handler& GetPtrToSDL_Surface() const;
 	private:
 		
 		Handler surfaceHandle_;

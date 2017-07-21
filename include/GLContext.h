@@ -7,7 +7,7 @@ namespace SDL {
 	public:
 	private:
 		friend class Window;
-		GLContext(void* windowHandler);
+		GLContext(Handler& windowHandler);
 		Handler contextHandler_;
 	};
 }

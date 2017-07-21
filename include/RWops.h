@@ -17,7 +17,7 @@ namespace SDL
 
 		bool Available() const;
 
-		void* GetPtrToSDL_RWops();
+		const Handler& GetPtrToSDL_RWops();
 		
 		size_t Read(void* ptr, size_t size, size_t maxnum);
 		size_t Write(const void* ptr, size_t size, size_t num);

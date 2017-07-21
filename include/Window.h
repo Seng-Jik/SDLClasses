@@ -27,7 +27,7 @@ namespace SDL
 
 		void UpdateWindowSurface() const;
 		inline Surface& GetWindowSurface() { return windowSurface_; }
-		void* GetHWND();
+		Handler GetHWND();
 
 		void ShowSimpleMessageBox(const string& title, const string& msg) const;
 

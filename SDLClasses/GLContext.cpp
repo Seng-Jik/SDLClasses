@@ -2,13 +2,17 @@
 #include <SDL_video.h>
 #include "..\include\SDLError.h"
 
-SDL::GLContext::GLContext(void* windowHandler):
-	contextHandler_(
-		SDL_GL_CreateContext(static_cast<SDL_Window*>(windowHandler))
-		, [](void* p) {
-			SDL_GL_DeleteContext(p);
-})
+static void glContextDeleter(SDL_GLContext hnd)
 {
-	if (contextHandler_.Get() == nullptr)
+	SDL_GL_DeleteContext(hnd);
+}
+
+SDL::GLContext::GLContext(SDL::Handler& windowHandler):
+	contextHandler_(
+		SDL_GL_CreateContext(windowHandler),
+		glContextDeleter
+	)
+{
+	if (static_cast<void*>(contextHandler_) == nullptr)
 		throw SDLError();
 }

@@ -5,9 +5,9 @@
 #include "..\include\Window.h"
 #include "..\include\GLContext.h"
 
-static void winDeleter(void* p)
+static void winDeleter(SDL_Window* p)
 {
-	SDL_DestroyWindow(static_cast<SDL_Window*>(p));
+	SDL_DestroyWindow(p);
 };
 
 SDL::Window::Window(const string & title, Rect<int32_t> r, WindowFlag flags)
@@ -22,26 +22,26 @@ SDL::Window::Window(const string & title, Rect<int32_t> r, WindowFlag flags)
 		),
 		winDeleter
 	),
-	windowSurface_(SDL_GetWindowSurface(static_cast<SDL_Window*>(windowHandler_.Get())),false)
+	windowSurface_(SDL_GetWindowSurface(windowHandler_),false)
 {
 }
 
 
 void SDL::Window::UpdateWindowSurface() const
 {
-	SDL_UpdateWindowSurface(static_cast<SDL_Window*>(windowHandler_.Get()));
+	SDL_UpdateWindowSurface(windowHandler_);
 }
 
-void* SDL::Window::GetHWND()
+SDL::Handler SDL::Window::GetHWND()
 {
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
-	if (SDL_GetWindowWMInfo(static_cast<SDL_Window*>(windowHandler_.Get()), &wmInfo))
+	if (SDL_GetWindowWMInfo(windowHandler_, &wmInfo))
 	{
 		if (wmInfo.subsystem == SDL_SYSWM_WINDOWS)
 		{
 			HWND i = wmInfo.info.win.window;
-			return i;
+			return { i,[](SDL::Handler&) {} };
 		}
 	}
 	throw std::runtime_error("Can not get HWND.");
@@ -49,15 +49,15 @@ void* SDL::Window::GetHWND()
 
 void SDL::Window::ShowSimpleMessageBox(const string & title, const string & msg) const
 {
-	SDL_ShowSimpleMessageBox(0, title.c_str(), msg.c_str(), static_cast<SDL_Window*>(windowHandler_.Get()));
+	SDL_ShowSimpleMessageBox(0, title.c_str(), msg.c_str(), windowHandler_);
 }
 
 void SDL::Window::SetWindowIcon(const Surface & icon)
 {
-	SDL_SetWindowIcon(static_cast<SDL_Window*>(windowHandler_.Get()), const_cast<SDL_Surface*>(static_cast<const SDL_Surface*>(icon.GetPtrToSDL_Surface())));
+	SDL_SetWindowIcon(windowHandler_, const_cast<SDL_Surface*>(static_cast<const SDL_Surface*>(icon.GetPtrToSDL_Surface())));
 }
 
 SDL::GLContext SDL::Window::CreateOpenGLContext()
 {
-	return GLContext(windowHandler_.Get());
+	return GLContext(windowHandler_);
 }

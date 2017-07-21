@@ -5,9 +5,9 @@
 #include <SDL_surface.h>
 #include "..\include\Guard.h"
 
-static void surDeleter(void* sur)
+static void surDeleter(SDL_Surface* sur)
 {
-	SDL_FreeSurface(static_cast<SDL_Surface*>(sur));
+	SDL_FreeSurface(sur);
 };
 
 
@@ -18,9 +18,7 @@ SDL::Surface::Surface(const std::string& bmpFile):
 }
 
 SDL::Surface::Surface(RWops & rw,int size):
-	surfaceHandle_(SDL_LoadBMP_RW(
-		static_cast<SDL_RWops*>(rw.GetPtrToSDL_RWops()), static_cast<int>(size)), surDeleter
-	)
+	surfaceHandle_(SDL_LoadBMP_RW(rw.GetPtrToSDL_RWops(), size), surDeleter)
 {
 	if (!Available()) throw SDLError();
 }
@@ -33,17 +31,17 @@ SDL::Surface::Surface(int width, int height, int depth, uint32_t Rm, uint32_t Gm
 
 bool SDL::Surface::Available() const
 {
-	return static_cast<SDL_Surface*>(surfaceHandle_.Get()) != nullptr;
+	return static_cast<SDL_Surface*>(surfaceHandle_) != nullptr;
 }
 
 void SDL::Surface::SaveBMP(const std::string & file) const
 {
-	SDL_SaveBMP(static_cast<SDL_Surface*>(surfaceHandle_.Get()), file.c_str());
+	SDL_SaveBMP(surfaceHandle_, file.c_str());
 }
 
 void SDL::Surface::Shade(std::function<Color<uint8_t>(int x, int y, Surface&thisSurface, Color<uint8_t> nowColor)> f)
 {
-	auto sur = static_cast<SDL_Surface*>(surfaceHandle_.Get());
+	auto sur = static_cast<SDL_Surface*>(surfaceHandle_);
 	const bool lock = SDL_MUSTLOCK(sur);
 
 	if (lock) SDL_LockSurface(sur);
@@ -69,64 +67,64 @@ void SDL::Surface::Fill(const Rect<int32_t> & rect, Color<uint8_t> col)
 {
 	auto frect = reinterpret_cast<const SDL_Rect&>(rect);
 	auto color = SDL_MapRGBA(
-		static_cast<SDL_Surface*>(surfaceHandle_.Get())->format,
+		static_cast<SDL_Surface*>(surfaceHandle_)->format,
 		col.r,
 		col.g,
 		col.b,
 		col.a);
 
-	SDL_FillRect(static_cast<SDL_Surface*>(surfaceHandle_.Get()), &frect, color);
+	SDL_FillRect(surfaceHandle_, &frect, color);
 }
 
 void SDL::Surface::Fill(const std::vector<Rect<int32_t>>& rectSet, Color<uint8_t> col)
 {
 	auto rects = reinterpret_cast<const SDL_Rect*>(rectSet.data());
 	auto color = SDL_MapRGBA(
-		static_cast<SDL_Surface*>(surfaceHandle_.Get())->format,
+		static_cast<SDL_Surface*>(surfaceHandle_)->format,
 		col.r,
 		col.g,
 		col.b,
 		col.a);
 
-	SDL_FillRects(static_cast<SDL_Surface*>(surfaceHandle_.Get()), rects, static_cast<int>(rectSet.size()), color);
+	SDL_FillRects(surfaceHandle_, rects, static_cast<int>(rectSet.size()), color);
 }
 
 void SDL::Surface::Clear(Color<uint8_t> col)
 {
 	auto color = SDL_MapRGBA(
-		static_cast<SDL_Surface*>(surfaceHandle_.Get())->format,
+		static_cast<SDL_Surface*>(surfaceHandle_)->format,
 		col.r,
 		col.g,
 		col.b,
 		col.a);
 
-	SDL_FillRect(static_cast<SDL_Surface*>(surfaceHandle_.Get()), nullptr, color);
+	SDL_FillRect(surfaceHandle_, nullptr, color);
 }
 
 void SDL::Surface::SetRLE(bool b)
 {
-	SDL_SetSurfaceRLE(static_cast<SDL_Surface*>(surfaceHandle_.Get()), b);
+	SDL_SetSurfaceRLE(surfaceHandle_, b);
 }
 
 void SDL::Surface::BlitFrom(const Surface & from, const Rect<int32_t> & fromRect, const Rect<int32_t> & toRect)
 {
 	auto srcRect = reinterpret_cast<const SDL_Rect&>(fromRect);
 	auto dstRect = reinterpret_cast<const SDL_Rect&>(toRect);
-	SDL_BlitSurface(static_cast<SDL_Surface*>(from.surfaceHandle_.Get()), &srcRect, static_cast<SDL_Surface*>(surfaceHandle_.Get()), &dstRect);
+	SDL_BlitSurface(from.surfaceHandle_, &srcRect, surfaceHandle_, &dstRect);
 }
 
 SDL::Vector2<int32_t> SDL::Surface::GetSize()
 {
-	auto sur = static_cast<SDL_Surface*>(surfaceHandle_.Get());
+	auto sur = static_cast<SDL_Surface*>(surfaceHandle_);
 	return Vector2<int32_t>{sur->w, sur->h};
 }
 
-const void * SDL::Surface::GetPtrToSDL_Surface() const
+const SDL::Handler& SDL::Surface::GetPtrToSDL_Surface() const
 {
-	return surfaceHandle_.Get();
+	return surfaceHandle_;
 }
 
 SDL::Surface::Surface(void * sur, bool des):
-	surfaceHandle_(sur, des ? surDeleter : [](void*) {})
+	surfaceHandle_(static_cast<SDL_Surface*>(sur), des ? surDeleter : [](SDL_Surface*) {})
 {
 }
