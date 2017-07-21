@@ -2,18 +2,19 @@
 
 
 SDL::Handler::Handler(Handler && r):
-	typeInfo_(std::move(r.typeInfo_))
+	typeInfo_(std::move(r.typeInfo_)),
+	deleter_(std::move(r.deleter_)),
+	ptr_(r.ptr_)
 {
-	*this = std::move(r);
+	r.ptr_ = nullptr;
 }
 
 const SDL::Handler& SDL::Handler::operator=(Handler && r)
 {
 	ptr_ = r.ptr_;
-	deleter_ = r.deleter_;
+	deleter_ = std::move(r.deleter_);
 
 	r.ptr_ = nullptr;
-	r.deleter_ = [](void*) {};
 
 	typeInfo_ = std::move(r.typeInfo_);
 
@@ -22,5 +23,6 @@ const SDL::Handler& SDL::Handler::operator=(Handler && r)
 
 SDL::Handler::~Handler()
 {
-	deleter_(*this);
+	if(deleter_)
+		deleter_(*this);
 }

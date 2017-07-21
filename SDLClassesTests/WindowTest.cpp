@@ -21,13 +21,13 @@ namespace SDLClassesTests
 			sdl.Delay(500);
 		}
 
-		TEST_METHOD(SimpleMessageBox)
+		TEST_METHOD(CreateOpenGLContext)
 		{
 			using namespace SDL;
 			::SDL::SDL sdl;
 			Window wnd("HelloWorld", Rect<int32_t>{ Window::Center,Window::Center,1024,768 }, Window::WindowFlag::OpenGL);
-			auto glContext = std::move(wnd.CreateOpenGLContext());
-			wnd.ShowSimpleMessageBox("Test MsgBox", "Just a Test");
+			auto glContext = wnd.CreateOpenGLContext();
+			//wnd.ShowSimpleMessageBox("Test MsgBox", "Just a Test");
 		}
 		
 	};
