@@ -39,8 +39,6 @@ namespace SDL
 	template<typename T>
 	Handler::operator T() const
 	{
-		auto p1 = typeid(T).name();
-		auto p2 = typeInfo_.name();
 		if (std::type_index(typeid(T)) != typeInfo_)
 			throw std::bad_cast();
 		return static_cast<T>(ptr_);

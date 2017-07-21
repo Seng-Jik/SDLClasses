@@ -2,10 +2,10 @@
 
 
 SDL::Handler::Handler(Handler && r):
-	typeInfo_(std::move(r.typeInfo_)),
-	deleter_(std::move(r.deleter_)),
-	ptr_(r.ptr_)
+	typeInfo_(std::move(r.typeInfo_))
 {
+	deleter_ = std::move(r.deleter_);
+	ptr_ = r.ptr_;
 	r.ptr_ = nullptr;
 }
 
