@@ -138,7 +138,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Clipboard.cpp" />
     <ClCompile Include="GLContext.cpp" />
     <ClCompile Include="Handler.cpp" />
