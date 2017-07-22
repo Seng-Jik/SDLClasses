@@ -1,6 +1,6 @@
 #pragma once
 #include "MouseState.h"
-#include "Haptic.h"
+//#include "Haptic.h"
 
 namespace SDL
 {
@@ -10,6 +10,6 @@ namespace SDL
 		MouseState GetMouseState() const;
 		void SetMouseCursorShow(bool);
 
-		Haptic OpenHaptic();
+		//Haptic OpenHaptic();
 	};
 }

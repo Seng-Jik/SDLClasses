@@ -1,5 +1,5 @@
 #pragma once
-#include "Handler.h"
+/*#include "Handler.h"
 // Comming soon
 
 namespace SDL
@@ -10,4 +10,4 @@ namespace SDL
 	private:
 		Handler hapticHandler_;
 	};
-}
+}*/

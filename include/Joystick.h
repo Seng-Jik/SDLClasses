@@ -1,8 +1,8 @@
 #pragma once
-#include <string>
+/*#include <string>
 #include "Handler.h"
 #include "Vector2.h"
-#include "Haptic.h"
+//#include "Haptic.h"
 
 // Comming soon
 namespace SDL
@@ -48,4 +48,4 @@ namespace SDL
 	private:
 		Handler joystickHandler_;
 	};
-}
+}*/
