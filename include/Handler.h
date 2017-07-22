@@ -13,14 +13,14 @@ namespace SDL
 		using Deleter = std::function<void(Handler&)>;
 
 		template<typename T>
-		Handler(T* ptr, Deleter deleter);
+		inline Handler(T* ptr, Deleter deleter);
 
-		const Handler& operator = (Handler&&);
-		Handler(Handler&& r);
-		~Handler();
+		inline const Handler& operator = (Handler&&);
+		inline Handler(Handler&& r);
+		inline ~Handler();
 
 		template<typename T>
-		operator T() const;
+		inline operator T() const;
 	private:
 		void* ptr_;
 		Deleter deleter_;
@@ -31,7 +31,7 @@ namespace SDL
 	};
 
 	template<typename T>
-	Handler::Handler(T * ptr, Deleter deleter) :
+	inline Handler::Handler(T * ptr, Deleter deleter) :
 		ptr_(ptr),
 		deleter_(deleter)
 #ifdef _DEBUG
@@ -41,7 +41,7 @@ namespace SDL
 	}
 
 	template<typename T>
-	Handler::operator T() const
+	inline Handler::operator T() const
 	{
 #ifdef _DEBUG
 		if (std::type_index(typeid(T)) != typeInfo_)
@@ -49,6 +49,38 @@ namespace SDL
 #endif
 		return static_cast<T>(ptr_);
 	}
+
+
+	inline Handler::Handler(Handler && r)
+#ifdef _DEBUG
+		:typeInfo_(std::move(r.typeInfo_))
+#endif
+	{
+		deleter_ = std::move(r.deleter_);
+		ptr_ = r.ptr_;
+		r.ptr_ = nullptr;
+	}
+
+	inline const Handler& Handler::operator=(Handler && r)
+	{
+		ptr_ = r.ptr_;
+		deleter_ = std::move(r.deleter_);
+
+		r.ptr_ = nullptr;
+
+#ifdef _DEBUG
+		typeInfo_ = std::move(r.typeInfo_);
+#endif
+
+		return *this;
+	}
+
+	inline Handler::~Handler()
+	{
+		if (deleter_)
+			deleter_(*this);
+	}
+
 }
 
 

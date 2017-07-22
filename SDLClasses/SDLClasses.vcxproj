@@ -140,7 +140,6 @@
   <ItemGroup>
     <ClCompile Include="Clipboard.cpp" />
     <ClCompile Include="GLContext.cpp" />
-    <ClCompile Include="Handler.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="Mouse.cpp" />
