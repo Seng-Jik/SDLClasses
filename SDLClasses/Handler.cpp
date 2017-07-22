@@ -1,8 +1,10 @@
 #include "..\include\Handler.h"
 
 
-SDL::Handler::Handler(Handler && r):
-	typeInfo_(std::move(r.typeInfo_))
+SDL::Handler::Handler(Handler && r)
+#ifdef _DEBUG
+	:typeInfo_(std::move(r.typeInfo_))
+#endif
 {
 	deleter_ = std::move(r.deleter_);
 	ptr_ = r.ptr_;
@@ -16,7 +18,9 @@ const SDL::Handler& SDL::Handler::operator=(Handler && r)
 
 	r.ptr_ = nullptr;
 
+#ifdef _DEBUG
 	typeInfo_ = std::move(r.typeInfo_);
+#endif
 
 	return *this;
 }
