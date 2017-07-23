@@ -41,7 +41,7 @@ void SDL::Surface::SaveBMP(const std::string & file) const
 
 void SDL::Surface::SaveBMP(RWops & rw,int freedst) const
 {
-	SDL_SaveBMP_RW(surfaceHandle_, rw, freedst);
+	SDL_SaveBMP_RW(surfaceHandle_, rw.GetPtrToSDL_RWops(), freedst);
 }
 
 void SDL::Surface::Shade(

@@ -51,7 +51,7 @@ namespace SDL
 	}
 
 
-	inline Handler::Handler(Handler && r)
+	inline Handler::Handler(Handler && r) noexcept
 #ifdef _DEBUG
 		:typeInfo_(std::move(r.typeInfo_))
 #endif
