@@ -25,6 +25,7 @@ namespace SDL
 
 		bool Available() const;
 		void SaveBMP(const std::string& file) const;
+		void SaveBMP(RWops& rw,int freedst) const;
 
 		void Shade(std::function<Color<uint8_t>(int x, int y, Surface& thisSurface, Color<uint8_t> nowColor)>);
 		void Fill(const Rect<int32_t>&, Color<uint8_t>);

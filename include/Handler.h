@@ -16,7 +16,7 @@ namespace SDL
 		inline Handler(T* ptr, Deleter deleter);
 
 		inline const Handler& operator = (Handler&&);
-		inline Handler(Handler&& r);
+		inline Handler(Handler&& r) noexcept;
 		inline ~Handler();
 
 		template<typename T>

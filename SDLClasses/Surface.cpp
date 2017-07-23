@@ -39,7 +39,15 @@ void SDL::Surface::SaveBMP(const std::string & file) const
 	SDL_SaveBMP(surfaceHandle_, file.c_str());
 }
 
-void SDL::Surface::Shade(std::function<Color<uint8_t>(int x, int y, Surface&thisSurface, Color<uint8_t> nowColor)> f)
+void SDL::Surface::SaveBMP(RWops & rw,int freedst) const
+{
+	SDL_SaveBMP_RW(surfaceHandle_, rw, freedst);
+}
+
+void SDL::Surface::Shade(
+	std::function<Color<uint8_t>(int x, int y, Surface&thisSurface, 
+		Color<uint8_t> nowColor)> f
+)
 {
 	auto sur = static_cast<SDL_Surface*>(surfaceHandle_);
 	const bool lock = SDL_MUSTLOCK(sur);
@@ -106,7 +114,11 @@ void SDL::Surface::SetRLE(bool b)
 	SDL_SetSurfaceRLE(surfaceHandle_, b);
 }
 
-void SDL::Surface::BlitFrom(const Surface & from, const Rect<int32_t> & fromRect, const Rect<int32_t> & toRect)
+void SDL::Surface::BlitFrom(
+	const Surface & from, 
+	const Rect<int32_t> & fromRect,
+	const Rect<int32_t> & toRect
+)
 {
 	auto srcRect = reinterpret_cast<const SDL_Rect&>(fromRect);
 	auto dstRect = reinterpret_cast<const SDL_Rect&>(toRect);

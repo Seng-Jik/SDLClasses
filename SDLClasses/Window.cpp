@@ -54,7 +54,10 @@ void SDL::Window::ShowSimpleMessageBox(const string & title, const string & msg)
 
 void SDL::Window::SetWindowIcon(const Surface & icon)
 {
-	SDL_SetWindowIcon(windowHandler_, const_cast<SDL_Surface*>(static_cast<const SDL_Surface*>(icon.GetPtrToSDL_Surface())));
+	SDL_SetWindowIcon(
+		windowHandler_, 
+		const_cast<SDL_Surface*>(static_cast<const SDL_Surface*>(icon.GetPtrToSDL_Surface()))
+	);
 }
 
 SDL::GLContext SDL::Window::CreateOpenGLContext()
