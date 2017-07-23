@@ -9,11 +9,11 @@ namespace SDL
 	template<typename T> struct Vector3;
 	struct MouseState;
 
-	class SDL final
+	class SDLInstance final
 	{
 	public:
 
-		enum class InitParam : uint32_t
+		enum InitParam : uint32_t
 		{
 			Timer = 0x00000001u,
 			Audio = 0x00000010u,
@@ -26,12 +26,12 @@ namespace SDL
 			Timer | Audio | Video | Joystick | Haptic | GameController | Events,
 		};
 
-		SDL(InitParam = InitParam::Everything);
-		SDL(const SDL&) = delete;
-		SDL(SDL&&) = delete;
-		~SDL();
-		SDL& operator = (SDL&&) = delete;
-		SDL& operator = (const SDL&) = delete;
+		SDLInstance(uint32_t = InitParam::Everything);
+		SDLInstance(const SDLInstance&) = delete;
+		SDLInstance(SDLInstance&&) = delete;
+		~SDLInstance();
+		SDLInstance& operator = (SDLInstance&&) = delete;
+		SDLInstance& operator = (const SDLInstance&) = delete;
 
 		void SetHint(const string& hint, const string& value);
 		Vector3<uint8_t> GetVersion() const;

@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SDL.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="SDLError.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -45,11 +42,11 @@
     <ClCompile Include="RWops.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SDLInstance.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\SDL.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\SDLError.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -102,6 +99,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Haptic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SDLInstance.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

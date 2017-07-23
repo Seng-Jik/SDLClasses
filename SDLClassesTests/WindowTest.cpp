@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include <SDL.h>
+#include <SDLInstance.h>
 #include <Window.h>
 #include <Vector4.h>
 #include <GLContext.h>
@@ -16,7 +16,7 @@ namespace SDLClassesTests
 		TEST_METHOD(NewWindowAndWait)
 		{
 			using namespace SDL;
-			::SDL::SDL sdl;
+			::SDL::SDLInstance sdl;
 			Window wnd("HelloWorld", Rect<int32_t>{ Window::Center,Window::Center,1024,768 }, Window::WindowFlag::Null);
 			sdl.Delay(500);
 		}
@@ -24,7 +24,7 @@ namespace SDLClassesTests
 		TEST_METHOD(CreateOpenGLContext)
 		{
 			using namespace SDL;
-			::SDL::SDL sdl;
+			::SDL::SDLInstance sdl;
 			Window wnd("HelloWorld", Rect<int32_t>{ Window::Center,Window::Center,1024,768 }, Window::WindowFlag::OpenGL);
 			auto glContext = wnd.CreateOpenGLContext();
 			//wnd.ShowSimpleMessageBox("Test MsgBox", "Just a Test");

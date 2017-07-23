@@ -3,7 +3,7 @@
 #include <Vector4.h>
 #include <Vector2.h>
 #include <Window.h>
-#include <SDL.h>
+#include <SDLInstance.h>
 #include <MouseState.h>
 #include <Mouse.h>
 #include <Library.h>
@@ -20,7 +20,7 @@ namespace SDLClassesTests
 		TEST_METHOD(MouseAndKeyboard)
 		{
 			using namespace SDL;
-			::SDL::SDL sdl;
+			::SDL::SDLInstance sdl;
 			::SDL::Mouse mouseDevice;
 			::SDL::Keyboard keyboardDevice;
 			Window wnd("Hello", Rect<int32_t>{ Window::Center,Window::Center,800,600 }, Window::WindowFlag::Null);

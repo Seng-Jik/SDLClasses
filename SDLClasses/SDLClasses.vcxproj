@@ -144,7 +144,7 @@
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="RWops.cpp" />
-    <ClCompile Include="SDL.cpp" />
+    <ClCompile Include="SDLInstance.cpp" />
     <ClCompile Include="SDLError.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -165,7 +165,7 @@
     <ClInclude Include="..\include\Vector2.h" />
     <ClInclude Include="..\include\Vector3.h" />
     <ClInclude Include="..\include\Vector4.h" />
-    <ClInclude Include="..\include\SDL.h" />
+    <ClInclude Include="..\include\SDLInstance.h" />
     <ClInclude Include="..\include\SDLError.h" />
     <ClInclude Include="..\include\Window.h" />
     <ClInclude Include="..\include\Joystick.h" />

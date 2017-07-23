@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include <SDL.h>
+#include <SDLInstance.h>
 #include <Vector3.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -13,7 +13,7 @@ namespace SDLClassesTests
 	public:
 		TEST_METHOD(InitAndQuit)
 		{
-			SDL::SDL sdl;
+			SDL::SDLInstance sdl;
 			auto ver = sdl.GetVersion();
 
 			Log("SDL Version:%d,%d,%d\n", static_cast<int>(ver.x), static_cast<int>(ver.y), static_cast<int>(ver.z));

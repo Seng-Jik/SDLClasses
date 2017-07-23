@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include <SDL.h>
+#include <SDLInstance.h>
 #include <Window.h>
 #include <Vector4.h>
 
@@ -15,7 +15,7 @@ namespace SDLClassesTests
 		TEST_METHOD(SimpleDraw)
 		{
 			using namespace SDL;
-			::SDL::SDL sdl;
+			::SDL::SDLInstance sdl(::SDL::SDLInstance::InitParam::Video | ::SDL::SDLInstance::InitParam::Events);
 			Window wnd("HelloWorld", Rect<int32_t>{ Window::Center,Window::Center,1024,768 }, Window::WindowFlag::Null);
 			auto& sur = wnd.GetWindowSurface();
 			sur.Clear(Color<uint8_t>{ 0,0,255,255 });
@@ -46,7 +46,7 @@ namespace SDLClassesTests
 		TEST_METHOD(BlitTest)
 		{
 			using namespace SDL;
-			::SDL::SDL sdl(::SDL::SDL::InitParam::Everything);
+			::SDL::SDLInstance sdl(::SDL::SDLInstance::InitParam::Everything);
 
 			Window wnd("HelloWorld", Rect<int32_t>{ Window::Center, Window::Center, 1024, 768 }, Window::WindowFlag::Null);
 			
