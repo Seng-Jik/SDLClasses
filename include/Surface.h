@@ -15,7 +15,7 @@ namespace SDL
 	class Surface final
 	{
 	public:
-		Surface(void* ptrSDL_Surface, bool autoDestoryByClass = true);
+		explicit Surface(void* ptrSDL_Surface, bool autoDestoryByClass = true);
 		Surface(const std::string& bmpFile);
 		Surface(RWops& rw,int size);
 		Surface(int width, int height, int depth, uint32_t Rm, uint32_t Gm, uint32_t Bm, uint32_t Am);

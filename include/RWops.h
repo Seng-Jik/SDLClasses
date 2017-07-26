@@ -10,9 +10,9 @@ namespace SDL
 	class RWops final
 	{
 	public:
-		RWops(void* ptrSDL_RWops);
-		RWops(void* mem, int size);
-		RWops(const void* mem, int size);
+		explicit RWops(void* ptrSDL_RWops);
+		explicit RWops(void* mem, int size);
+		explicit RWops(const void* mem, int size);
 		RWops(const string& filePath, const string& mode);
 
 		bool Available() const;
