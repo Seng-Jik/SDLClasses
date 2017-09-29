@@ -52,6 +52,11 @@ void SDL::Window::ShowSimpleMessageBox(const string & title, const string & msg)
 	SDL_ShowSimpleMessageBox(0, title.c_str(), msg.c_str(), windowHandler_);
 }
 
+void SDL::Window::SetWindowTitle(const string & title)
+{
+	SDL_SetWindowTitle(windowHandler_, title.c_str());
+}
+
 void SDL::Window::SetWindowIcon(const Surface & icon)
 {
 	SDL_SetWindowIcon(
