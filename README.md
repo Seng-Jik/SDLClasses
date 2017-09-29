@@ -1,5 +1,6 @@
 # SDLClasses
-An OO Wrapper For SDL 2.0.5.
+An OO Wrapper For SDL 2.
 
-You must compile this fucking library with SDL-2.0.5.
+Unpack SDL2 development package to this dir,and rename the dir to "SDL2".
+
 
