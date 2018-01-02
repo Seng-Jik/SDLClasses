@@ -15,7 +15,6 @@ namespace SDL
 		template<typename T>
 		inline Handler(T* ptr, Deleter deleter);
 
-		inline const Handler& operator = (Handler&&);
 		inline Handler(Handler&& r) noexcept;
 		inline ~Handler();
 
@@ -59,20 +58,6 @@ namespace SDL
 		deleter_ = std::move(r.deleter_);
 		ptr_ = r.ptr_;
 		r.ptr_ = nullptr;
-	}
-
-	inline const Handler& Handler::operator=(Handler && r)
-	{
-		ptr_ = r.ptr_;
-		deleter_ = std::move(r.deleter_);
-
-		r.ptr_ = nullptr;
-
-#ifdef _DEBUG
-		typeInfo_ = std::move(r.typeInfo_);
-#endif
-
-		return *this;
 	}
 
 	inline Handler::~Handler()
