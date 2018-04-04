@@ -23,7 +23,7 @@
     <ProjectGuid>{D8EE9DC5-CCA0-4D93-911F-1E9DBBECFCEB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SDLClassesTests</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

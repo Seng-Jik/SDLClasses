@@ -35,6 +35,10 @@ namespace SDL
 		void BlitFrom(const Surface& from, const Rect<int32_t>& fromRect, const Rect<int32_t>& toRect);
 		Vector2<int32_t> GetSize();
 
+		int GetPitch() const;
+		void* GetPixelPointer();
+		
+
 		const Handler& GetPtrToSDL_Surface() const;
 	private:
 		

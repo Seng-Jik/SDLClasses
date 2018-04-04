@@ -131,6 +131,16 @@ SDL::Vector2<int32_t> SDL::Surface::GetSize()
 	return Vector2<int32_t>{sur->w, sur->h};
 }
 
+int SDL::Surface::GetPitch() const
+{
+	return static_cast<SDL_Surface*>(surfaceHandle_)->pitch;
+}
+
+void * SDL::Surface::GetPixelPointer()
+{
+	return static_cast<SDL_Surface*>(surfaceHandle_)->pixels;
+}
+
 const SDL::Handler& SDL::Surface::GetPtrToSDL_Surface() const
 {
 	return surfaceHandle_;
